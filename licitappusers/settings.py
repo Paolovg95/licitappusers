@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'licitaciones',
+    'ofertas',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,22 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CATEGORIES = [
+    "ALIMENTOS",
+    "BEBIDAS",
+    "TECNOLOGIA",
+    "CATERING",
+    "LIBRERIA",
+    "PAPELERIA",
+    "OFICINA",
+    "VEHICULOS",
+    "PISOS",
+    "MUEBLES",
+    "ELECTRODOMESTICOS",
+    "SALUD",
+    "HIGIENE"
+]
+CURRENCY = ["Guarani", "Dolar"]
+STATUS = ["OPEN", "CLOSED"]
+CITIES = ["ASUNCION", "ALTO PARANA", "AMAMBAY", "CONCEPCION", "ETC", "ETC"]
