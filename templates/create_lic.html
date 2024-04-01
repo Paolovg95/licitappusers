@@ -1,8 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
-  <form class="m-4 form-row" method="post">
+
+<h1>{{ licitacion.title }}</h1>
+<div class="p-3 bg-light">
+  <h2>Generales</h2>
+  <form class="m-4" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success" type="submit">Create</button>
+    <div class="row">
+      <div class="col-md-6">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        <small class="text-danger">
+          {{ form.title.errors}}
+        </small>
+      </div>
+      <div class="col-md-6">
+        {{ form.client.label_tag }}
+        {{ form.client }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {{ form.obs }}
+        {{ form.status.label_tag }}
+        {{ form.status }}
+        {{ form.total_sum_lic.label_tag }}
+        {{ form.total_sum_lic }}
+      </div>
+      <div class="col-md-6">
+        <div id="field-{{form.currency.name}}">
+          {{ form.currency.label_tag }}
+          {{ form.currency }}
+        </div>
+        <div id="field-{{form.category.name}}">
+          {{ form.category.label_tag }}
+          {{ form.category }}
+        </div>
+        <div id="field-{{form.close_date.name}}">
+          {{ form.close_date.label_tag }}
+          {{ form.close_date }}
+          <small class="text-danger">
+            {{ form.close_date.errors}}
+          </small>
+        </div>
+        <div id="field-{{form.payment_method.name}}">
+          {{ form.payment_method.label_tag }}
+          {{ form.payment_method }}
+        </div>
+        <div id="field-{{form.delivery_time.name}}">
+          {{ form.delivery_time.label_tag }}
+          {{ form.delivery_time }}
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-dark" type="submit">Create</button>
   </form>
+  {% include 'partials/table_item.html' %}
+</div>
 {% endblock content %}

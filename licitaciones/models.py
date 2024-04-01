@@ -1,5 +1,7 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.conf import settings
+from datetime import date
 # Create your models here.
 
 def get_categories():
@@ -22,8 +24,8 @@ def get_cities():
 class Licitacion(models.Model):
     title = models.CharField(max_length=255)
     obs = models.TextField(blank=True, null=True)
-    start_date = models.DateTimeField(auto_now_add=True)
-    close_date = models.DateTimeField()
+    start_date = models.DateField(auto_now_add=True, null=True)
+    close_date = models.DateField()
     status = models.CharField(max_length=10, choices=get_status, default="OPEN")
     currency = models.CharField(max_length=15, choices=get_currencies)
     category = models.CharField(max_length=100, choices=get_categories)
@@ -32,6 +34,8 @@ class Licitacion(models.Model):
     client = models.CharField(blank=True, null=True,max_length=20)
     city = models.CharField(blank=True, null=True, max_length=20, choices=get_cities)
     total_sum_lic = models.IntegerField()
+
+
 
 class LicitacionItem(models.Model):
     licitacion = models.ForeignKey(Licitacion, on_delete=models.CASCADE)
