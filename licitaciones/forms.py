@@ -1,6 +1,7 @@
 from django import forms
+from django.forms import inlineformset_factory
 from datetime import date
-from licitaciones.models import Licitacion
+from licitaciones.models import Licitacion, LicitacionItem
 
 # LicitacionForm = forms.modelform_factory(Licitacion, fields="__all__")
 
@@ -30,3 +31,9 @@ class LicitacionForm(forms.ModelForm):
         if close_date <= now:
             raise forms.ValidationError("Close Date has to be in the future")
         return close_date
+class LicitacionItemForm(forms.ModelForm):
+    class Meta:
+        model = LicitacionItem
+        fields = "__all__"
+
+LicitacionItemFormSet = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=3)

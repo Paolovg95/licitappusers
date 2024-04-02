@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.shortcuts import get_object_or_404
+from licitaciones.forms import LicitacionItemFormSet
 from licitaciones.models import Licitacion
 from licitaciones.forms import LicitacionForm
 # Create your views here.
@@ -13,6 +14,7 @@ def create_update_lic(request, lic_id=0):
     if request.method == "GET":
         if lic_id == 0:
             form = LicitacionForm()
+            data['formset'] = LicitacionItemFormSet()
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
             form = LicitacionForm(instance=lic_instance)

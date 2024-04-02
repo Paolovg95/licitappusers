@@ -55,6 +55,8 @@
     </div>
     <button class="btn btn-dark" type="submit">Create</button>
   </form>
-  {% include 'partials/table_item.html' %}
+  {% if formset %}
+    {% include 'partials/lic_item_create.html' %}
+  {% endif %}
 </div>
 {% endblock content %}
