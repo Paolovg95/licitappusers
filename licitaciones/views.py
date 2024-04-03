@@ -5,8 +5,10 @@ from licitaciones.models import Licitacion
 from licitaciones.forms import LicitacionForm
 # Create your views here.
 
-def lic_item_create(request, lic_id=0):
-    return render(request, "partials/lic_item_create.html", {})
+def add_lic_item(request):
+    data = {}
+    data['formset'] = LicitacionItemFormSet()
+    return render(request, "partials/lic_item_add.html", data)
 
 
 def create_update_lic(request, lic_id=0):

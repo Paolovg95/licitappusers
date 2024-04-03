@@ -14,17 +14,16 @@
     {% endfor %}
   </thead>
   <tbody>
-    {% for form in formset %}
-      <tr>
-        <th scope="row"></th>
-        <td>{{ form.name }}</td>
-        <td>{{ form.description }}</td>
-        <td>{{ form.quantity }}</td>
-        <td>{{ form.unit }}</td>
-        <td>{{ form.price }}</td>
-        <td><a class="inline-deletelink">Delete</a></td>
-        <td><a class="inline-editlink">Edit</a></td>
-      </tr>
-    {% endfor %}
+    <tr id="item-row">
+      <th scope="row"></th>
+      <td>{{ formset.form.name }}</td>
+      <td>{{ formset.form.description }}</td>
+      <td>{{ formset.form.quantity }}</td>
+      <td>{{ formset.form.unit }}</td>
+      <td>{{ formset.form.price }}</td>
+      <td><a class="inline-deletelink">Delete</a></td>
+      <td><a class="inline-editlink">Edit</a></td>
+    </tr>
   </tbody>
+  <button hx-get="{% url 'add_lic_item' %}" hx-trigger="click" hx-target="#item-row" hx-swap='afterend'>Add more</button>
 </table>
