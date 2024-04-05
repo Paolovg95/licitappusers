@@ -45,5 +45,5 @@ class LicitacionItem(models.Model):
     quantity = models.CharField(max_length=50)
     unit = models.CharField(max_length=10)
     price = models.IntegerField()
-    date_added = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+    date_added = models.DateTimeField(blank=True, null=True,auto_now_add=True)
+    date_updated = models.DateTimeField(blank=True, null=True, auto_now=True)

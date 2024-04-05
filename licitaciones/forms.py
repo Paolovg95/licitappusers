@@ -36,4 +36,4 @@ class LicitacionItemForm(forms.ModelForm):
         model = LicitacionItem
         fields = "__all__"
 
-LicitacionItemFormSet = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=3)
+LicitacionItemFormSet = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)

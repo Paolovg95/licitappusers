@@ -1,9 +1,30 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.shortcuts import get_object_or_404
-from licitaciones.forms import LicitacionItemFormSet
-from licitaciones.models import Licitacion
-from licitaciones.forms import LicitacionForm
+from .forms import LicitacionItemFormSet
+from licitaciones.models import Licitacion, LicitacionItem
+from licitaciones.forms import LicitacionForm, LicitacionItemForm
 # Create your views here.
+
+def create_lic_item(request):
+    data = {}
+    if request.method == 'POST':
+        lic_instance = Licitacion.objects.get(id=1)
+        formset = LicitacionItemFormSet(request.POST, instance=lic_instance)
+        data['formset'] = formset
+        if formset.is_valid():
+            formset.save()
+            code = HttpResponse.status_code
+            content = f"Created {code}"
+            return HttpResponse(content,content_type="text/plain")
+        else:
+            print(formset.error_messages)
+            content = f"Not Created"
+            return HttpResponse(content,content_type="text/plain")
+
+    else:
+        formset = LicitacionItemFormSet()
+        data['formset'] = formset
+    return render(request, "lic_item_create.html", data)
 
 def add_lic_item(request):
     data = {}
