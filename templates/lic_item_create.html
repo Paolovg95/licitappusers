@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="" method="POST">
-  {{ formset.management_form }}
-  {% csrf_token %}
-  {% for form in formset %}
-    {{ form.as_p }}
-  {% endfor %}
-  <button type="submit">Save</button>
-</form>
+<div id="item-forms">
+  {% include 'partials/lic_item_add.html' %}
+</div>
+<button hx-get="{% url 'create_lic_item' %}" hx-trigger="click" hx-target="#item-forms" hx-swap="afterend">Add more</button>
+
+<button id="submit-all" type="submit">Send</button>
 {% endblock content %}

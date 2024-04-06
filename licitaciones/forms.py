@@ -35,5 +35,9 @@ class LicitacionItemForm(forms.ModelForm):
     class Meta:
         model = LicitacionItem
         fields = "__all__"
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["licitacion"].widget.attrs.update({'class': 'bg-light form-control m-2', 'placeholder': 'Licitacion', 'disabled': 'True'})
 
-LicitacionItemFormSet = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)
+
+# LicitacionItemFormSet = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)

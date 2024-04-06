@@ -1,10 +1,10 @@
-<tr id="item-row">
-  <th scope="row"></th>
-  <td>{{ formset.form.name }}</td>
-  <td>{{ formset.form.description }}</td>
-  <td>{{ formset.form.quantity }}</td>
-  <td>{{ formset.form.unit }}</td>
-  <td>{{ formset.form.price }}</td>
-  <td><a class="inline-deletelink">Delete</a></td>
-  <td><a class="inline-editlink">Edit</a></td>
-</tr>
+<form hx-post="{% url 'create_lic_item' %}" hx-trigger="click from:#submit-all">
+  {% csrf_token %}
+  {{ form.licitacion }}
+  {{ form.name }}
+  {{ form.description }}
+  {{ form.quantity }}
+  {{ form.unit }}
+  {{ form.price }}
+  {{ form.note }}
+</form>
