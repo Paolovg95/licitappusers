@@ -19,7 +19,7 @@ class LicitacionForm(forms.ModelForm):
         self.fields["category"].widget.attrs.update({'class': 'form-control m-2', 'placeholder': 'Categoría'})
         self.fields["payment_method"].widget.attrs.update({'class': 'form-control m-2', 'placeholder': 'Método de pago'})
         self.fields["delivery_time"].widget.attrs.update({'class': 'form-control m-2', 'placeholder': 'Tiempo de entrega'})
-        self.fields["client"].widget.attrs.update({'class': 'bg-light form-control m-2', 'placeholder': 'Empresa', 'readonly': 'readonly'})
+        self.fields["client"].widget.attrs.update({'class': 'bg-light form-control m-2', 'placeholder': 'Empresa'})
         self.fields["city"].widget.attrs.update({'class': 'form-control m-2' , 'placeholder': 'Ciudad'})
         self.fields["total_sum_lic"].widget.attrs.update({'class': 'form-control m-2', 'placeholder': 'Suma total'})
     class Meta:
@@ -37,7 +37,3 @@ class LicitacionItemForm(forms.ModelForm):
         fields = "__all__"
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["licitacion"].widget.attrs.update({'class': 'bg-light form-control m-2', 'placeholder': 'Licitacion', 'disabled': 'True'})
-
-
-# LicitacionItemFormSet = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)

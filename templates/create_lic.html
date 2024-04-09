@@ -1,18 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
+<style>
+  input:valid {
+    border-color: green;
+  }
+  input:invalid {
+    border-color: rgb(128, 0, 0);
+  }
+</style>
 
 <h1>{{ licitacion.title }}</h1>
-<div class="p-3 bg-light">
+<div id="lic-form" class="bg-light">
   <h2>Generales</h2>
-  <form class="m-4" method="post">
+  <form class="m-4" method="POST">
     {% csrf_token %}
     <div class="row">
       <div class="col-md-6">
         {{ form.title.label_tag }}
         {{ form.title }}
-        <small class="text-danger">
-          {{ form.title.errors}}
-        </small>
+        {% if form.title.errors %}
+          <div class="invalid-feedback">
+            not good!
+          </div>
+        {% endif %}
+        <div class="invalid-feedback">
+          Please select a Title
+        </div>
       </div>
       <div class="col-md-6">
         {{ form.client.label_tag }}
@@ -53,10 +66,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-dark" type="submit">Create</button>
+    <button class="btn btn-success" type="submit" id="submit-all">Send</button>
   </form>
-  {% if formset %}
-    {% include 'lic_item_create.html' %}
-  {% endif %}
 </div>
 {% endblock content %}

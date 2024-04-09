@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-<div id="item-forms">
-  {% include 'partials/lic_item_add.html' %}
-</div>
-<button hx-get="{% url 'create_lic_item' %}" hx-trigger="click" hx-target="#item-forms" hx-swap="afterend">Add more</button>
-
-<button id="submit-all" type="submit">Send</button>
-{% endblock content %}

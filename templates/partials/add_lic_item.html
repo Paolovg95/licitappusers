@@ -1,0 +1,17 @@
+{% for form in formset %}
+  <div class="item-form">
+    {{ form.licitacion }}
+    {{ form.name.label_tag }}
+    {{ form.name }}
+    {{ form.description.label_tag }}
+    {{ form.description }}
+    {{ form.quantity.label_tag }}
+    {{ form.quantity }}
+    {{ form.unit.label_tag }}
+    {{ form.unit }}
+    {{ form.price.label_tag }}
+    {{ form.price }}
+    {{ form.note.label_tag }}
+    {{ form.note }}
+  </div>
+{% endfor %}

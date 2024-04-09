@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+  <form id="form" action="" method="POST">
+    {{ formset.management_form }}
+    {% csrf_token %}
+    {% for form in formset %}
+      <div class="item-form">
+        {{ form.licitacion }}
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+        {{ form.unit.label_tag }}
+        {{ form.unit }}
+        {{ form.price.label_tag }}
+        {{ form.price }}
+        {{ form.note.label_tag }}
+        {{ form.note }}
+      </div>
+    {% endfor %}
+    <button id="add-item">Add more</button>
+  </form>
+<button form="form" type="submit">Submit</button>
+<script>
+  let itemForm = document.querySelectorAll(".item-form")
+  let container = document.querySelector("#form")
+  let addButton = document.querySelector("#add-item")
+  let totalForms = document.querySelector("#id_licitacionitem_set-TOTAL_FORMS")
+
+  let formNum = itemForm.length - 1 // Get the number of the last form on the page with zero-based indexing
+  addButton.addEventListener('click', addForm)
+
+  function addForm(e) {
+    e.preventDefault()
+
+    let newForm = itemForm[0].cloneNode(true)
+    let formRegex = RegExp(`licitacionitem_set-(\\d){1}-`, 'g')
+
+    formNum++ //Increment the form number
+    newForm.innerHTML = newForm.innerHTML.replace(formRegex, `licitacionitem_set-${formNum}-`) //Update the new form to have the correct form number
+    container.insertBefore(newForm, addButton) // Insert the new form at the end of the list of forms
+
+    totalForms.setAttribute('value', `${formNum + 1}`) //Increment the number of total forms in the management form
+  }
+</script>
+{% endblock %}
+
+
+<!-- <table class="table table-hover p-3 bg-light">
+  {{ formset.management_form}}
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">{{ formset.form.name.label_tag }}</th>
+      <th scope="col">{{ formset.form.description.label_tag }}</th>
+      <th scope="col">{{ formset.form.quantity.label_tag }}</th>
+      <th scope="col">{{ formset.form.unit.label_tag }}</th>
+      <th scope="col">{{ formset.form.price.label_tag }}</th>
+      <th scope="col">{{ formset.form.note.label_tag }}</th>
+    </tr>
+  </thead>
+  <tbody id="table-body">
+    {% for form in formset %}
+      <tr id="item-row">
+        <form method="POST" id="myform">
+          {{ formset.management_form }}
+          {% csrf_token %}
+          <th scope="row">{{ form.licitacion }}</th>
+          <td>{{ form.name }}</td>
+          <td>{{ form.description }}</td>
+          <td>{{ form.quantity }}</td>
+          <td>{{ form.unit }}</td>
+          <td>{{ form.price }}</td>
+          <td>{{ form.note }}</td>
+        </form>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table> -->
+<!-- {% include 'partials/lic_item_add.html' %} -->
