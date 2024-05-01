@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import inlineformset_factory
 from datetime import date
 from licitaciones.models import Licitacion, LicitacionItem
 

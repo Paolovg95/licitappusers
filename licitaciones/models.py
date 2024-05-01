@@ -35,6 +35,9 @@ class Licitacion(models.Model):
     city = models.CharField(blank=True, null=True, max_length=20, choices=get_cities)
     total_sum_lic = models.IntegerField()
 
+    class Meta:
+        verbose_name = 'licitacion'
+        verbose_name_plural = 'licitaciones'
 
 
 class LicitacionItem(models.Model):
