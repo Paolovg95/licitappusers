@@ -8,6 +8,7 @@ django = "==5.0.2"
 asgiref = "==3.7.2"
 sqlparse = "==0.4.4"
 django-htmx = "*"
+django-compressor = "*"
 
 [dev-packages]
 

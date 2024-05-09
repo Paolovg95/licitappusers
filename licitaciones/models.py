@@ -43,7 +43,7 @@ class Licitacion(models.Model):
 class LicitacionItem(models.Model):
     licitacion = models.ForeignKey(Licitacion, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
+    description = models.TextField(max_length=50)
     note = models.CharField(max_length=50)
     quantity = models.CharField(max_length=50)
     unit = models.CharField(max_length=10)

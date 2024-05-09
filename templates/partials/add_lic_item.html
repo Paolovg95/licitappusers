@@ -1,15 +1,15 @@
-<div class="item-form">
-  {{ form.licitacion }}
-  {{ form.name.label_tag }}
-  {{ form.name }}
-  {{ form.description.label_tag }}
-  {{ form.description }}
-  {{ form.quantity.label_tag }}
-  {{ form.quantity }}
-  {{ form.unit.label_tag }}
-  {{ form.unit }}
-  {{ form.price.label_tag }}
-  {{ form.price }}
-  {{ form.note.label_tag }}
-  {{ form.note }}
-</div>
+{% for hidden in form.hidden_fields %}
+  {{ hidden }}
+{% endfor %}
+<tr class="item-form bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:bg-white focus:border-sky-500 focus:ring-0">
+  <td class="px-6 py-4">{{ form.name }}</td>
+  <td class="px-6 py-4">{{ form.description }}</td>
+  <td class="px-6 py-4">{{ form.unit }}</td>
+  <td class="px-6 py-4">{{ form.price }}</td>
+  <td class="px-6 py-4">{{ form.quantity }}</td>
+  <td class="px-6 py-4">{{ form.note }}</td>
+  <td class="px-6 py-4 text-right">
+    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+    <a href="#"class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete<a>
+  </td>
+</tr>
