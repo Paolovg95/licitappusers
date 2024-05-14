@@ -24,4 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='home'),
     path('licitaciones/', include("licitaciones.urls"))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
