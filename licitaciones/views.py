@@ -4,15 +4,22 @@ from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 # Create your views here.
-def view_all_licitaciones(request):
-    licitaciones = Licitacion.objects.all()
-    context = {
-        'licitaciones': licitaciones
-    }
-    return render(request, "partials/all_lic.html", context)
-
 def view_licitaciones(request):
-    return render(request, "licitaciones.html", {})
+    status = request.GET.get('status')
+    if request.htmx:
+        if status != None:
+            licitaciones = Licitacion.objects.filter(status=status)
+            return render(request, "partials/all_lic.html", {'licitaciones': licitaciones})
+        else:
+            licitaciones = Licitacion.objects.all()
+            return render(request, "partials/all_lic.html", {'licitaciones': licitaciones})
+    else:
+        licitaciones = Licitacion.objects.all()
+        return render(request, "licitaciones.html", {'licitaciones': licitaciones})
+
+
+
+
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)
     data = {}

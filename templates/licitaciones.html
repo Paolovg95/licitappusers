@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="p-4 mt-14">
-
   <div
     class="flex flex-wrap justify-between text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
     <ul class="flex flex-wrap">
-      <li>
+      <li hx-ext="path-params">
         <a
-          hx-get="/licitaciones/all"
+          hx-get="/licitaciones/"
+          hx-replace-url="true"
           hx-trigger="click"
           hx-target="#licitacion-content"
           hx-swap="innerHTML"
@@ -15,16 +15,34 @@
           class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Todo</a>
       </li>
       <li>
-        <a href="#"
+        <a
+          hx-get="/licitaciones/"
+          hx-vals='{"status": "OPEN"}'
+          hx-replace-url="true"
+          hx-trigger="click"
+          hx-target="#licitacion-content"
+          hx-swap="innerHTML"
+          href="#"
           class="inline-block p-4 text-blue-800 border-b-2 border-blue-800 rounded-t-lg active dark:text-blue-800 dark:border-blue-800"
           aria-current="page">Abierta<span>(5)</span></a>
-      </li>
-      <li>
-        <a href="#"
+        </li>
+        <li>
+          <a
+          hx-get="/licitaciones/CLOSED/"
+          hx-trigger="click"
+          hx-target="#licitacion-content"
+          hx-swap="innerHTML"
+          href="#"
           class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Cerrada<span>(1)</span></a>
-      </li>
-      <li>
-        <a href="#"
+        </li>
+        <li>
+          <a
+          hx-get="/licitaciones/FINISHED/"
+          hx-trigger="click"
+          hx-target="#licitacion-content"
+          hx-swap="innerHTML"
+          hx-replace-url="true"
+          href="#"
           class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Finalizada<span>(3)</span></a>
       </li>
     </ul>
@@ -35,12 +53,11 @@
       hx-get="/licitaciones/new" hx-target="#licitacion-content" hx-swap="innerHTML" hx-replace-url="true">Nueva Licitacion
     </button>
   </div>
-  {% if licitacion %}
-    <h2>{{ licitacion.title }}</h2>
-  {% endif %}
-  <h3 class="my-10 text-3xl dark:text-white">Informacion General</h3>
   </div>
   <div id="licitacion-content">
+    {% if licitaciones %}
+      {% include 'partials/all_lic.html' %}
+    {% endif %}
   </div>
 
 </div>
