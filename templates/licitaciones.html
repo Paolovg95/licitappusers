@@ -4,31 +4,51 @@
 
 <div class="flex flex-wrap justify-between mb-4 border-b border-gray-200 dark:border-gray-700">
   <ul class="flex flex-wrap -mb-px text-sm font-medium text-center"
-
     id="licitaciones-tab"
+    data-tabs-active-classes="text-blue-800 border-blue-800"
     data-tabs-toggle="#licitaciones-tab-content" role="tablist">
     <li class="me-2">
       <button
+        hx-get="/licitaciones"
+        hx-replace-url="true"
+        hx-trigger="click"
+        hx-target="#all-licitaciones-container"
+        hx-swap="innerHTML"
         class="inline-block p-4 border-b-2 rounded-t-lg
-        hover:text-blue-800 hover:border-blue-800" id="all-licitaciones-tab" data-tabs-target="#all-licitaciones-table"
+        hover:text-blue-800 hover:border-blue-800" id="all-licitaciones-tab" data-tabs-target="#all-licitaciones-container"
         type="button" role="tab" aria-controls="all-licitaciones" aria-selected="true">Todo</button>
     </li>
-    <li class="me-2" role="presentation">
+    <li class="me-2" hx-ext="path-params" role="presentation">
       <button
+        hx-get="/licitaciones/?status=OPEN"
+        hx-replace-url="true"
+        hx-trigger="click"
+        hx-target="#open-licitaciones-container"
+        hx-swap="innerHTML"
         class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
-        id="open-licitaciones-tab" data-tabs-target="#open-licitaciones-table" type="button" role="tab" aria-controls="open-licitaciones-tab"
+        id="open-licitaciones-tab" data-tabs-target="#open-licitaciones-container" type="button" role="tab" aria-controls="open-licitaciones-tab"
         aria-selected="false">Abierta</button>
     </li>
-    <li class="me-2" role="presentation">
+    <li class="me-2" hx-ext="path-params" role="presentation">
       <button
+        hx-get="/licitaciones/?status=CLOSED"
+        hx-replace-url="true"
+        hx-trigger="click"
+        hx-target="#closed-licitaciones-container"
+        hx-swap="innerHTML"
         class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
-        id="closed-licitaciones-tab" data-tabs-target="#closed-licitaciones-table" type="button" role="tab" aria-controls="closed-licitaciones-tab"
+        id="closed-licitaciones-tab" data-tabs-target="#closed-licitaciones-container" type="button" role="tab" aria-controls="closed-licitaciones-tab"
         aria-selected="false">Cerrada</button>
     </li>
-    <li class="me-2" role="presentation">
+    <li class="me-2" hx-ext="path-params" role="presentation">
       <button
+        hx-get="/licitaciones/?status=FINISHED"
+        hx-replace-url="true"
+        hx-trigger="click"
+        hx-target="#finished-licitaciones-container"
+        hx-swap="innerHTML"
         class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
-        id="finished-licitaciones-tab" data-tabs-target="#finished-licitaciones-table" type="button" role="tab" aria-controls="finished-licitaciones-tab"
+        id="finished-licitaciones-tab" data-tabs-target="#finished-licitaciones-container" type="button" role="tab" aria-controls="finished-licitaciones-tab"
         aria-selected="false">Finalizada</button>
     </li>
   </ul>
@@ -39,23 +59,21 @@
   </button>
 </div>
 <div id="licitaciones-tab-content">
-  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="all-licitaciones-table" role="tabpanel"
-    aria-labelledby="all-licitaciones-tab">
-    <p>ALL</p>
+  <!-- ALL -->
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="all-licitaciones-container" role="tabpanel"
+  aria-labelledby="all-licitaciones-tab">
   </div>
-  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="open-licitaciones-table" role="tabpanel"
+  <!-- OPEN -->
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="open-licitaciones-container" role="tabpanel"
   aria-labelledby="open-licitaciones-tab">
-
-    <p>OPEN</p>
   </div>
-  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="closed-licitaciones-table" role="tabpanel"
+  <!-- CLOSED -->
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="closed-licitaciones-container" role="tabpanel"
     aria-labelledby="closed-licitaciones-tab">
-    <p>CLOSED</p>
-
   </div>
-  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="finished-licitaciones-table" role="tabpanel"
+  <!-- FINISHED -->
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="finished-licitaciones-container" role="tabpanel"
     aria-labelledby="finished-licitaciones-tab">
-    <p>FINISHED</p>
   </div>
 </div>
 
