@@ -1,119 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="p-4 mt-14">
-  <div
-    class="flex flex-wrap justify-between text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-    <ul class="flex flex-wrap">
-      <li hx-ext="path-params">
-        <a
-          hx-get="/licitaciones/"
-          hx-replace-url="true"
-          hx-trigger="click"
-          hx-target="#licitacion-content"
-          hx-swap="innerHTML"
-          href="#"
-          class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Todo</a>
-      </li>
-      <li>
-        <a
-          hx-get="/licitaciones/"
-          hx-vals='{"status": "OPEN"}'
-          hx-replace-url="true"
-          hx-trigger="click"
-          hx-target="#licitacion-content"
-          hx-swap="innerHTML"
-          href="#"
-          class="inline-block p-4 text-blue-800 border-b-2 border-blue-800 rounded-t-lg active dark:text-blue-800 dark:border-blue-800"
-          aria-current="page">Abierta<span>(5)</span></a>
-        </li>
-        <li>
-          <a
-          hx-get="/licitaciones/CLOSED/"
-          hx-trigger="click"
-          hx-target="#licitacion-content"
-          hx-swap="innerHTML"
-          href="#"
-          class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Cerrada<span>(1)</span></a>
-        </li>
-        <li>
-          <a
-          hx-get="/licitaciones/FINISHED/"
-          hx-trigger="click"
-          hx-target="#licitacion-content"
-          hx-swap="innerHTML"
-          hx-replace-url="true"
-          href="#"
-          class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Finalizada<span>(3)</span></a>
-      </li>
-    </ul>
-    <button
-      class="justify-end text-white mt-5 sm:mt-0 bg-blue-800 hover:bg-blue-100
-      hover:text-blue-800
-      focus:outline-none focus:ring-4 focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-800 dark:hover:bg-blue-800 dark:focus:ring-blue-800"
-      hx-get="/licitaciones/new" hx-target="#licitacion-content" hx-swap="innerHTML" hx-replace-url="true">Nueva Licitacion
-    </button>
+
+<div class="flex flex-wrap justify-between mb-4 border-b border-gray-200 dark:border-gray-700">
+  <ul class="flex flex-wrap -mb-px text-sm font-medium text-center"
+
+    id="licitaciones-tab"
+    data-tabs-toggle="#licitaciones-tab-content" role="tablist">
+    <li class="me-2">
+      <button
+        class="inline-block p-4 border-b-2 rounded-t-lg
+        hover:text-blue-800 hover:border-blue-800" id="all-licitaciones-tab" data-tabs-target="#all-licitaciones-table"
+        type="button" role="tab" aria-controls="all-licitaciones" aria-selected="true">Todo</button>
+    </li>
+    <li class="me-2" role="presentation">
+      <button
+        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+        id="open-licitaciones-tab" data-tabs-target="#open-licitaciones-table" type="button" role="tab" aria-controls="open-licitaciones-tab"
+        aria-selected="false">Abierta</button>
+    </li>
+    <li class="me-2" role="presentation">
+      <button
+        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+        id="closed-licitaciones-tab" data-tabs-target="#closed-licitaciones-table" type="button" role="tab" aria-controls="closed-licitaciones-tab"
+        aria-selected="false">Cerrada</button>
+    </li>
+    <li class="me-2" role="presentation">
+      <button
+        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+        id="finished-licitaciones-tab" data-tabs-target="#finished-licitaciones-table" type="button" role="tab" aria-controls="finished-licitaciones-tab"
+        aria-selected="false">Finalizada</button>
+    </li>
+  </ul>
+  <button
+    type="button"
+    class="flex justify-end text-white mt-5 sm:mt-0 bg-blue-800 hover:bg-blue-100 hover:text-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-800 dark:hover:bg-blue-800"
+    ><a href="{% url 'create_lic' %}">Nueva Licitacion</a>
+  </button>
+</div>
+<div id="licitaciones-tab-content">
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="all-licitaciones-table" role="tabpanel"
+    aria-labelledby="all-licitaciones-tab">
+    <p>ALL</p>
   </div>
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="open-licitaciones-table" role="tabpanel"
+  aria-labelledby="open-licitaciones-tab">
+
+    <p>OPEN</p>
   </div>
-  <div id="licitacion-content">
-    {% if licitaciones %}
-      {% include 'partials/all_lic.html' %}
-    {% endif %}
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="closed-licitaciones-table" role="tabpanel"
+    aria-labelledby="closed-licitaciones-tab">
+    <p>CLOSED</p>
+
   </div>
+  <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="finished-licitaciones-table" role="tabpanel"
+    aria-labelledby="finished-licitaciones-tab">
+    <p>FINISHED</p>
+  </div>
+</div>
 
 </div>
 {% endblock content %}
-  <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
-      data-tabs-toggle="#default-tab-content" role="tablist">
-      <li class="me-2" role="presentation">
-        <button hx-get="/licitaciones/all" hx-trigger="click" hx-target="#profile" hx-swap="innerHTML"
-          class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile" type="button"
-          role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-      </li>
-      <li class="me-2" role="presentation">
-        <button
-          class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-          id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard"
-          aria-selected="false">Dashboard</button>
-      </li>
-      <li class="me-2" role="presentation">
-        <button
-          class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-          id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
-          aria-selected="false">Settings</button>
-      </li>
-      <li role="presentation">
-        <button
-          class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-          id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
-          aria-selected="false">Contacts</button>
-      </li>
-    </ul>
-  </div>
-  <div id="default-tab-content">
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
-      aria-labelledby="profile-tab">
-
-    </div>
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel"
-      aria-labelledby="dashboard-tab">
-      <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-          class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another
-        tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
-        visibility and styling.</p>
-    </div>
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel"
-      aria-labelledby="settings-tab">
-      <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-          class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another
-        tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
-        visibility and styling.</p>
-    </div>
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel"
-      aria-labelledby="contacts-tab">
-      <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-          class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another
-        tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content
-        visibility and styling.</p>
-    </div>
-  </div>

@@ -3,7 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
-# Create your views here.
+
+
 def view_licitaciones(request):
     status = request.GET.get('status')
     if request.htmx:
@@ -16,9 +17,6 @@ def view_licitaciones(request):
     else:
         licitaciones = Licitacion.objects.all()
         return render(request, "licitaciones.html", {'licitaciones': licitaciones})
-
-
-
 
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)
@@ -61,4 +59,4 @@ def create_update_lic(request, lic_id=0):
     elif request.htmx:
         return render(request, "partials/new_lic_form.html", data)
     else:
-        return redirect("/licitaciones/")
+        return render(request, "partials/new_lic_form.html", data)
