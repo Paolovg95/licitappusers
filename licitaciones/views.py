@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
-
+from django.contrib import messages
 def view_licitaciones(request):
     status = request.GET.get('status')
     if status != None:
@@ -15,7 +15,7 @@ def view_licitaciones(request):
     else:
         if request.htmx:
             licitaciones = Licitacion.objects.all()
-            return render(request, "partials/licitaciones.html", {'licitaciones': licitaciones})
+            return render(request, "licitaciones.html", {'licitaciones': licitaciones})
         else:
             licitaciones = Licitacion.objects.all()
             return render(request, "licitaciones.html", {'licitaciones': licitaciones})
@@ -45,9 +45,13 @@ def create_update_lic(request, lic_id=0):
                 formset = LicitacionItemFormset(request.POST, instance=lic)
                 if formset.is_valid():
                     formset.save()
-                    code = HttpResponse.status_code
-                    content = f"Created - Code: {code}"
-                    return HttpResponse(content,content_type="text/plain")
+                    data['form'] = form
+                    data['formset'] = formset
+                    messages.success(request, "Data updated successfully.")
+                    return render(request, "licitaciones_new_form.html", data )
+                    # code = HttpResponse.status_code
+                    # content = f"Created - Code: {code}"
+                    # return HttpResponse(content,content_type="text/plain")
         else:
             form = LicitacionForm(request.POST, instance=lic_instance)
             formset = LicitacionItemFormset(request.POST, instance=lic_instance)
@@ -56,8 +60,12 @@ def create_update_lic(request, lic_id=0):
                 lic.save()
                 if formset.is_valid():
                     formset.save()
-                    code = HttpResponse.status_code
-                    content = f"Edited - Code: {code}"
-                    return HttpResponse(content,content_type="text/plain")
+                    data['form'] = form
+                    data['formset'] = formset
+                    messages.success(request, "Data updated successfully.")
+                    return render(request, "partials/licitaciones_new_form.html", data )
+                    # code = HttpResponse.status_code
+                    # content = f"Edited - Code: {code}"
+                    # return HttpResponse(content,content_type="text/plain")
     else:
         return render(request, "partials/licitaciones_new_form.html", data)

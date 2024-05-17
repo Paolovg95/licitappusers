@@ -2,16 +2,27 @@
 {% block content %}
 <div class="p-4 mt-14">
   <div class="flex flex-wrap">
-    <button onClick="javascript:history.go(-1)"
-      class="flex flex-wrap p-2">
-      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-        height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M5 12h14M5 12l4-4m-4 4 4 4" />
-      </svg>
-      <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
-    </button>
+    <a href="{% url 'licitaciones' %}">
+      <button
+        class="flex flex-wrap p-2">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+          height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 12h14M5 12l4-4m-4 4 4 4" />
+        </svg>
+        <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
+      </button>
+    </a>
   </div>
+<!-- TOAST -->
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+      {% include 'partials/toast.html' %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
 
   <h1 class="my-4 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
   <form method="POST" enctype="multipart/form-data">
@@ -63,6 +74,7 @@
       <div class="basis-1/4 mx-2 block text-md font-medium leading-6 text-gray-900">
         {{ form.close_date.label_tag }}
         {{ form.close_date }}
+          {{ form.close_date.errors }}
       </div>
     </div>
     <div class="m-4">
