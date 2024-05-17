@@ -2,7 +2,7 @@
 {% block content %}
 <div class="p-4 mt-14">
   <div class="flex flex-wrap">
-    <a href="{% url 'licitaciones' %}"
+    <button onClick="javascript:history.go(-1)"
       class="flex flex-wrap p-2">
       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" fill="none" viewBox="0 0 24 24">
@@ -10,7 +10,7 @@
           d="M5 12h14M5 12l4-4m-4 4 4 4" />
       </svg>
       <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
-    </a>
+    </button>
   </div>
 
   <h1 class="my-4 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>

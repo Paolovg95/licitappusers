@@ -4,36 +4,36 @@
       <span
         class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
         <span class="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
-        OPEN
+        ABIERTA
       </span>
     {% elif status == 'CLOSED' %}
       <span
         class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
         <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-        CLOSED
+        CERRADA
       </span>
     {% else %}
       <span
         class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
         <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-        FINISHED
+        FINALIZADA
       </span>
     {% endif %}
   {% else %}
     <span
       class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
       <span class="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
-      OPEN
+      ABIERTA
     </span>
     <span
       class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
       <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-      CLOSED
+      CERRADA
     </span>
     <span
       class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
       <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-      FINISHED
+      FINALIZADA
     </span>
   {% endif %}
 </div>
@@ -85,158 +85,54 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-search-1" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-          </div>
-        </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-          <a href="#" class="font-medium text-gray-600 dark:text-gray-500 hover:underline hover:text-gray-900">ADQUISICION DE PRODUCTOS DE LIMPIEZA PARA NO</a>
-        </th>
-        <td class="px-6 py-4">
-          <span
-            class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
-            <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-            FINISHED
-          </span>
-        </td>
-        <td class="max-w-52 px-6 py-4 truncate ...">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">John Smith</a>
-        </td>
-        <td class="px-6 py-4">
-          01/01/2024
-        </td>
-        <td class="px-6 py-4">
-          01/10/2024
-        </td>
-        <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
-        </td>
-      </tr>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-search-2" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-search-2" class="sr-only">checkbox</label>
-          </div>
-        </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          Microsoft Surface Pro
-        </th>
-        <td class="px-6 py-4">
-          White
-        </td>
-        <td class="px-6 py-4">
-          Laptop PC
-        </td>
-        <td class="px-6 py-4">
-          $1999
-        </td>
-        <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        </td>
-      </tr>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-search-3" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-search-3" class="sr-only">checkbox</label>
-          </div>
-        </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          Magic Mouse 2
-        </th>
-        <td class="px-6 py-4">
-          Black
-        </td>
-        <td class="px-6 py-4">
-          Accessories
-        </td>
-        <td class="px-6 py-4">
-          $99
-        </td>
-        <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        </td>
-      </tr>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-3" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-          </div>
-        </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          Apple Watch
-        </th>
-        <td class="px-6 py-4">
-          Silver
-        </td>
-        <td class="px-6 py-4">
-          Accessories
-        </td>
-        <td class="px-6 py-4">
-          $179
-        </td>
-        <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        </td>
-      </tr>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-3" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-          </div>
-        </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          iPad
-        </th>
-        <td class="px-6 py-4">
-          Gold
-        </td>
-        <td class="px-6 py-4">
-          Tablet
-        </td>
-        <td class="px-6 py-4">
-          $699
-        </td>
-        <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        </td>
-      </tr>
-      <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-3" type="checkbox"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-          </div>
-        </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          Apple iMac 27"
-        </th>
-        <td class="px-6 py-4">
-          Silver
-        </td>
-        <td class="px-6 py-4">
-          PC Desktop
-        </td>
-        <td class="px-6 py-4">
-          $3999
-        </td>
-        <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        </td>
-      </tr>
+      {% for licitacion in licitaciones %}
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <td class="w-4 p-4">
+            <div class="flex items-center">
+              <input id="checkbox-table-search-1" type="checkbox"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+            </div>
+          </td>
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+            <a href="{% url 'licitaciones_edit' licitacion.id %}" class="font-medium text-gray-600 dark:text-gray-500 hover:underline hover:text-gray-900">{{ licitacion.title|upper }}</a>
+          </th>
+          <td class="px-6 py-4">
+                {% if licitacion.status == 'OPEN' %}
+                <span
+                  class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                  <span class="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
+                  ABIERTA
+                </span>
+                {% elif licitacion.status == 'CLOSED' %}
+                <span
+                  class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
+                  <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
+                  CERRADA
+                </span>
+                {% else %}
+                <span
+                  class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                  <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
+                  FINALIZADA
+                </span>
+                {% endif %}
+          </td>
+          <td class="max-w-52 px-6 py-4 truncate ...">
+            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">John Smith</a>
+          </td>
+          <td class="px-6 py-4">
+            {{ licitacion.start_date }}
+          </td>
+          <td class="px-6 py-4">
+            {{ licitacion.close_date }}
+          </td>
+          <td class="px-6 py-4">
+            <a href="{% url 'licitaciones_edit' licitacion.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
