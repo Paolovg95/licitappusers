@@ -4,19 +4,22 @@ from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 
-
 def view_licitaciones(request):
     status = request.GET.get('status')
-    if request.htmx:
-        if status != None:
-            licitaciones = Licitacion.objects.filter(status=status)
-            return render(request, "partials/all_lic.html", {'licitaciones': licitaciones})
+    if status != None:
+        licitaciones = Licitacion.objects.filter(status=status)
+        if request.htmx:
+            return render(request, "partials/licitaciones_list.html", {'licitaciones': licitaciones, 'status': status})
+        else:
+            return redirect('/licitaciones/')
+    else:
+        if request.htmx:
+            licitaciones = Licitacion.objects.all()
+            return render(request, "partials/licitaciones.html", {'licitaciones': licitaciones})
         else:
             licitaciones = Licitacion.objects.all()
-            return render(request, "partials/all_lic.html", {'licitaciones': licitaciones})
-    else:
-        licitaciones = Licitacion.objects.all()
-        return render(request, "licitaciones.html", {'licitaciones': licitaciones})
+            return render(request, "licitaciones.html", {'licitaciones': licitaciones})
+
 
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1)
@@ -56,7 +59,5 @@ def create_update_lic(request, lic_id=0):
                     code = HttpResponse.status_code
                     content = f"Edited - Code: {code}"
                     return HttpResponse(content,content_type="text/plain")
-    elif request.htmx:
-        return render(request, "partials/new_lic_form.html", data)
     else:
-        return render(request, "partials/new_lic_form.html", data)
+        return render(request, "partials/licitaciones_new_form.html", data)
