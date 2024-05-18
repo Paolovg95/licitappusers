@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="p-4 mt-14">
+<div id="new_lic" class="p-4 mt-14">
   <div class="flex flex-wrap">
     <a href="{% url 'licitaciones' %}">
       <button
@@ -15,17 +15,11 @@
     </a>
   </div>
 <!-- TOAST -->
-{% if messages %}
-  {% for message in messages %}
-    {% if message.tags == 'success' %}
-      {% include 'partials/toast.html' %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+<div id="toast-container">
 
-
+</div>
   <h1 class="my-4 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
-  <form method="POST" enctype="multipart/form-data">
+  <form hx-post="{{ url }}" hx-target="#toast-container" hx-swap="beforebegin" enctype="multipart/form-data">
     {% csrf_token %}
     <!-- 1ST ROW -->
     <div class="flex flex-row">
@@ -94,7 +88,7 @@
         </thead>
         <tbody id="items">
           {% for form in formset %}
-            {% include 'partials/item_new_form.html' %}
+            {% include 'partials/create_item_form.html' %}
           {% endfor %}
         </tbody>
       </table>
@@ -105,7 +99,7 @@
     {% if licitacion %}
     <button type="submit">Save changes</button>
     {% else %}
-    <button type="submit">Create</button>
+    <button type="submit" hx-post=".">Create</button>
     {% endif %}
   </form>
 </div>
