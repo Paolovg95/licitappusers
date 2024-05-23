@@ -5,6 +5,7 @@ from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 from django.contrib import messages
+
 def read_licitaciones(request):
     status = request.GET.get('status')
     if status != None:
@@ -51,7 +52,7 @@ def create_update_lic(request, lic_id=0):
                     formset.save()
                     data['form'] = form
                     data['formset'] = formset
-                    messages.success(request, "Data created successfully.")
+                    data['message'] = "Licitación creada"
                     return render(request, "partials/toast.html", data)
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
@@ -65,5 +66,5 @@ def create_update_lic(request, lic_id=0):
                     formset.save()
                     data['form'] = form
                     data['formset'] = formset
-                    messages.success(request, "Data updated successfully.")
+                    data['message'] = "Información actualizada"
                     return render(request, "partials/toast.html", data)
