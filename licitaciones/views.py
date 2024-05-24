@@ -32,13 +32,23 @@ def create_update_lic(request, lic_id=0):
             form = LicitacionForm(instance=lic_instance)
             formset = LicitacionItemFormset(instance=lic_instance)
             data["licitacion"] = lic_instance
+            data['target'] = "#toast-container"
+
+            if request.htmx:
+                data['form'] = form
+                data['formset'] = formset
+                data['url'] = url
+                return render(request, "partials/form_lic.html", data)
         elif lic_id <= 0:
             url = reverse('create_licitaciones')
             form = LicitacionForm()
             formset = LicitacionItemFormset()
-        data["url"] = url
-        data["form"] = form
-        data["formset"] = formset
+            data['target'] = "this"
+            data['swap'] = "outerHTML"
+
+        data['form'] = form
+        data['formset'] = formset
+        data['url'] = url
         return render(request, "create_licitaciones_form.html", data)
 
     if request.method == "POST":
@@ -53,7 +63,7 @@ def create_update_lic(request, lic_id=0):
                     data['form'] = form
                     data['formset'] = formset
                     data['message'] = "Licitación creada"
-                    return render(request, "partials/toast.html", data)
+                    return redirect("update_licitaciones", lic_id=lic.id)
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
             data["licitacion"] = lic_instance

@@ -16,92 +16,9 @@
   </div>
 <!-- TOAST -->
 <div id="toast-container">
-
 </div>
   <h1 class="my-4 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
-  <form hx-post="{{ url }}" hx-target="#toast-container" hx-swap="beforebegin" enctype="multipart/form-data">
-    {% csrf_token %}
-    <!-- 1ST ROW -->
-    <div class="flex flex-row">
-      <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
-        {{ form.title.label_tag }}
-        {{ form.title }}
-      </div>
-      <div class="basis-1/4 mx-2 block text-md font-medium leading-6 text-gray-900">
-        {{ form.client.label_tag }}
-        {{ form.client }}
-      </div>
-      <div class="basis-1/4 block text-md font-medium leading-6 text-gray-900">
-        {{ form.status.label_tag }}
-        {{ form.status }}
-      </div>
-    </div>
-    <!-- 2ND ROW -->
-    <div class="flex flex-row mt-10 gap-4">
-      <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
-        {{ form.obs.label_tag }}
-        {{ form.obs }}
-      </div>
-      <div class="basis-1/4 mb-4 block text-md font-medium leading-6 text-gray-900">
-        {{ form.city.label_tag }}
-        {{ form.city }}
-        {{ form.category.label_tag }}
-        {{ form.category }}
-      </div>
-      <div class="basis-1/4 block text-md font-medium leading-6 text-gray-900">
-        {{ form.currency.label_tag }}
-        {{ form.currency }}
-        {{ form.payment_method.label_tag }}
-        {{ form.payment_method }}
-      </div>
-    </div>
-    <!-- 3RD ROW -->
-    <div class="flex flex-row my-10">
-      <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
-        {{ form.total_sum_lic.label_tag }}
-        {{ form.total_sum_lic }}
-      </div>
-      <div class="basis-1/2 mx-2 block text-md font-medium leading-6 text-gray-900">
-        {{ form.delivery_time.label_tag }}
-        {{ form.delivery_time }}
-      </div>
-      <div class="basis-1/4 mx-2 block text-md font-medium leading-6 text-gray-900">
-        {{ form.close_date.label_tag }}
-        {{ form.close_date }}
-          {{ form.close_date.errors }}
-      </div>
-    </div>
-    <div class="m-4">
-      <h2 class="mb-4 text-3xl font-extrabold dark:text-white">Items</h2>
-      {{ formset.management_form }}
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">{{ formset.form.name.label_tag }}</th>
-            <th scope="col" class="px-6 py-3">{{ formset.form.description.label_tag }}</th>
-            <th scope="col" class="px-6 py-3">{{ formset.form.unit.label_tag }}</th>
-            <th scope="col" class="px-6 py-3">{{ formset.form.price.label_tag }}</th>
-            <th scope="col" class="px-6 py-3">{{ formset.form.quantity.label_tag }}</th>
-            <th scope="col" class="px-6 py-3">{{ formset.form.note.label_tag }}</th>
-            <th scope="col" class="px-6 py-3">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="items">
-          {% for form in formset %}
-            {% include 'partials/create_item_form.html' %}
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <button type="button"
-      class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-sky-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-      id="add-item">Add more items</button>
-    {% if licitacion %}
-    <button type="submit">Save changes</button>
-    {% else %}
-    <button type="submit" hx-post=".">Create</button>
-    {% endif %}
-  </form>
+  {% include 'partials/form_lic.html' %}
 </div>
 <script>
   let itemForm = document.querySelectorAll(".item-form")
