@@ -1,5 +1,7 @@
-<form hx-post="{{ url }}" hx-target="{{ target }}" hx-swap="{{ swap }}" hx-replace-url="true"
-  enctype="multipart/form-data">
+{% if message %}
+  {% include 'partials/toast.html' with message=message %}
+{% endif %}
+<form hx-post="{{ url }}" hx-target="{{ target }}" hx-swap="{{ swap }}" hx-replace-url="true" enctype="multipart/form-data">
   {% csrf_token %}
   <!-- 1ST ROW -->
   <div class="flex flex-row">

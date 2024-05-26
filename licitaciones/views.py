@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404
 from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
-from django.contrib import messages
 
 def read_licitaciones(request):
     status = request.GET.get('status')
@@ -32,20 +31,17 @@ def create_update_lic(request, lic_id=0):
             form = LicitacionForm(instance=lic_instance)
             formset = LicitacionItemFormset(instance=lic_instance)
             data["licitacion"] = lic_instance
-            data['target'] = "#toast-container"
-
             if request.htmx:
-                data['form'] = form
-                data['formset'] = formset
-                data['url'] = url
-                return render(request, "partials/form_lic.html", data)
+                data['message'] = "Licitacion Creada"
+
+
         elif lic_id <= 0:
             url = reverse('create_licitaciones')
             form = LicitacionForm()
             formset = LicitacionItemFormset()
-            data['target'] = "this"
-            data['swap'] = "outerHTML"
 
+        data['target'] = "this"
+        data['swap'] = "outerHTML"
         data['form'] = form
         data['formset'] = formset
         data['url'] = url
@@ -62,8 +58,8 @@ def create_update_lic(request, lic_id=0):
                     formset.save()
                     data['form'] = form
                     data['formset'] = formset
-                    data['message'] = "Licitación creada"
-                    return redirect("update_licitaciones", lic_id=lic.id)
+                    data['message'] = "Licitacion Creada"
+                    return redirect( 'update_licitaciones', lic_id=lic.id)
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
             data["licitacion"] = lic_instance
@@ -76,5 +72,5 @@ def create_update_lic(request, lic_id=0):
                     formset.save()
                     data['form'] = form
                     data['formset'] = formset
-                    data['message'] = "Información actualizada"
-                    return render(request, "partials/toast.html", data)
+                    data['message'] = "Datos actualizados"
+                    return render(request, "partials/form_lic.html", data)

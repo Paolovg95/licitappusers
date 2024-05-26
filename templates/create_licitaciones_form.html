@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="new_lic" class="p-4 mt-14">
-  <div class="flex flex-wrap">
+  <div>
     <a href="{% url 'licitaciones' %}">
       <button
         class="flex flex-wrap p-2">
@@ -13,11 +13,14 @@
         <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
       </button>
     </a>
+    {% if licitacion %}
+      <h1 class="my-10 text-3xl dark:text-white"><strong>Editar Datos</strong></h1>
+    {% else %}
+    <h1 class="my-10 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
+    {% endif %}
   </div>
 <!-- TOAST -->
-<div id="toast-container">
-</div>
-  <h1 class="my-4 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
+
   {% include 'partials/form_lic.html' %}
 </div>
 <script>
