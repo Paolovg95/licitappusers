@@ -1,7 +1,15 @@
 {% if message %}
   {% include 'partials/toast.html' with message=message %}
 {% endif %}
-<form hx-post="{{ url }}" hx-target="{{ target }}" hx-swap="{{ swap }}" hx-replace-url="true" enctype="multipart/form-data">
+<!-- URL could be:
+  licitaciones/new OR licitaciones/edit/{id}
+-->
+<form hx-post="{{ url }}" hx-target="this" hx-swap="outerHTML" hx-replace-url="true" enctype="multipart/form-data">
+  {% if licitacion %}
+    <h1 class="my-10 text-3xl dark:text-white"><strong>Editar Datos</strong></h1>
+  {% else %}
+    <h1 class="my-10 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
+  {% endif %}
   {% csrf_token %}
   <!-- 1ST ROW -->
   <div class="flex flex-row">
@@ -54,6 +62,7 @@
     </div>
   </div>
   <div class="m-4">
+
     <h2 class="mb-4 text-3xl font-extrabold dark:text-white">Items</h2>
     {{ formset.management_form }}
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

@@ -13,17 +13,13 @@
         <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
       </button>
     </a>
-    {% if licitacion %}
-      <h1 class="my-10 text-3xl dark:text-white"><strong>Editar Datos</strong></h1>
-    {% else %}
-    <h1 class="my-10 text-3xl font-extrabold dark:text-white">Nueva Licitacion</h1>
-    {% endif %}
   </div>
-  {% include 'partials/form_lic.html' %}
+  <div id="form-container">
+    {% include 'partials/form_lic.html' %}
+  </div>
 </div>
 <script>
   let itemForm = document.querySelectorAll(".item-form")
-  let container = document.querySelector("#lic-form")
   let items = document.querySelector("#items")
   let addButton = document.querySelector("#add-item")
   let totalForms = document.querySelector("#id_licitacionitem_set-TOTAL_FORMS")

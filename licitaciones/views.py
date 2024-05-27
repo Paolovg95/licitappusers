@@ -30,16 +30,23 @@ def create_update_lic(request, lic_id=0):
             url = reverse('update_licitaciones', kwargs={'lic_id': lic_instance.id })
             form = LicitacionForm(instance=lic_instance)
             formset = LicitacionItemFormset(instance=lic_instance)
-            data["licitacion"] = lic_instance
+            data['licitacion'] = lic_instance
+            # Licitacion CREATED via HTMX
             if request.htmx:
-                data['message'] = "Licitacion Creada"
+                data = {
+                    'licitacion': lic_instance,
+                    'form': form,
+                    'formset': formset,
+                    'url': url,
+                    'message': 'Licitacion Creada'
+                }
+                return render(request, "partials/form_lic.html", data)
+
         elif lic_id <= 0:
             url = reverse('create_licitaciones')
             form = LicitacionForm()
             formset = LicitacionItemFormset()
 
-        data['target'] = "this"
-        data['swap'] = "outerHTML"
         data['form'] = form
         data['formset'] = formset
         data['url'] = url
