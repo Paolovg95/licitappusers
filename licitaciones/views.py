@@ -12,11 +12,11 @@ def read_licitaciones(request):
         if request.htmx:
             return render(request, "partials/read_licitaciones_status.html", {'licitaciones': licitaciones, 'status': status})
         else:
-            return redirect('/licitaciones/')
+            return redirect('licitaciones')
     else:
         if request.htmx:
             licitaciones = Licitacion.objects.all()
-            return render(request, "read_licitaciones.html", {'licitaciones': licitaciones})
+            return render(request, "partials/read_licitaciones_status.html", {'licitaciones': licitaciones})
         else:
             licitaciones = Licitacion.objects.all()
             return render(request, "read_licitaciones.html", {'licitaciones': licitaciones})
@@ -33,8 +33,6 @@ def create_update_lic(request, lic_id=0):
             data["licitacion"] = lic_instance
             if request.htmx:
                 data['message'] = "Licitacion Creada"
-
-
         elif lic_id <= 0:
             url = reverse('create_licitaciones')
             form = LicitacionForm()

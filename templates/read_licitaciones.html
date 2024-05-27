@@ -10,9 +10,14 @@
         data-tabs-toggle="#licitaciones-tab-content" role="tablist">
         <li class="me-2" role="presentation">
           <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+            hx-get="/licitaciones"
+            hx-replace-url="true"
+            hx-trigger="click"
+            hx-target="#all-licitaciones-container"
+            hx-swap="innerHTML"
             id="all-licitaciones-tab" data-tabs-target="#all-licitaciones-container" type="button" role="tab"
-            aria-controls="all-licitaciones-tab" aria-selected="false">Todo</button>
-          </a>
+            aria-controls="all-licitaciones-tab" aria-selected="false">Todo
+          </button>
         </li>
         <li class="me-2" role="presentation">
           <button
@@ -56,6 +61,7 @@
     </button>
   </div>
   <div id="licitaciones-tab-content">
+    <!-- TODO -->
     <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="all-licitaciones-container" role="tabpanel"
     aria-labelledby="all-licitaciones-tab">
       {% if licitaciones %}
