@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="new_lic" class="p-4 mt-14">
-  <div>
-    <a href="{% url 'licitaciones' %}">
-      <button
-        class="flex flex-wrap p-2">
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-          height="24" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 12h14M5 12l4-4m-4 4 4 4" />
-        </svg>
-        <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
-      </button>
-    </a>
-  </div>
+  <a href="{% url 'licitaciones' %}">
+    <button
+      class="flex flex-wrap p-2">
+      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+        height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 12h14M5 12l4-4m-4 4 4 4" />
+      </svg>
+      <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
+    </button>
+  </a>
   <div id="form-container">
     {% include 'partials/form_lic.html' %}
   </div>
