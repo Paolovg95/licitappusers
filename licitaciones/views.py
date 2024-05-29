@@ -10,13 +10,13 @@ def read_licitaciones(request):
     if status != None:
         licitaciones = Licitacion.objects.filter(status=status)
         if request.htmx:
-            return render(request, "partials/read_licitaciones_status.html", {'licitaciones': licitaciones, 'status': status})
+            return render(request, "partials/table_licitaciones.html", {'licitaciones': licitaciones, 'status': status})
         else:
             return redirect('licitaciones')
     else:
         if request.htmx:
             licitaciones = Licitacion.objects.all()
-            return render(request, "partials/read_licitaciones_status.html", {'licitaciones': licitaciones})
+            return render(request, "partials/table_licitaciones.html", {'licitaciones': licitaciones})
         else:
             licitaciones = Licitacion.objects.all()
             return render(request, "read_licitaciones.html", {'licitaciones': licitaciones})
@@ -31,7 +31,7 @@ def create_update_lic(request, lic_id=0):
             form = LicitacionForm(instance=lic_instance)
             formset = LicitacionItemFormset(instance=lic_instance)
             data['licitacion'] = lic_instance
-            # Licitacion CREATED via HTMX
+            # Licitacion CREATED via HTMX - Redirected after create POST request
             if request.htmx:
                 data = {
                     'licitacion': lic_instance,
@@ -40,7 +40,7 @@ def create_update_lic(request, lic_id=0):
                     'url': url,
                     'message': 'Licitacion Creada'
                 }
-                return render(request, "partials/form_lic.html", data)
+                return render(request, "partials/form_licitaciones.html", data)
 
         elif lic_id <= 0:
             url = reverse('create_licitaciones')
@@ -50,7 +50,7 @@ def create_update_lic(request, lic_id=0):
         data['form'] = form
         data['formset'] = formset
         data['url'] = url
-        return render(request, "create_licitaciones_form.html", data)
+        return render(request, "create_licitaciones.html", data)
 
     if request.method == "POST":
         if lic_id == 0:
@@ -78,4 +78,4 @@ def create_update_lic(request, lic_id=0):
                     data['form'] = form
                     data['formset'] = formset
                     data['message'] = "Datos actualizados"
-                    return render(request, "partials/form_lic.html", data)
+                    return render(request, "partials/form_licitaciones.html", data)
