@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="content p-4 mt-14">
-  <div class="flex flex-wrap justify-between mb-4 border-b border-gray-200 dark:border-gray-700">
+  <h1 class="mb-10 text-3xl font-extrabold dark:text-white">Mis Licitaciones</h1>
+  <div class="flex flex-wrap justify-between mb-4 border-b border-gray-100 dark:border-gray-700">
     <div class="flex flex-wrap justify-between">
       <ul class="flex justify-end -mb-px text-sm font-medium text-center"
         id="licitaciones-tab"
-        data-tabs-active-classes="text-blue-800 border-blue-800"
+        data-tabs-active-classes="text-blue-700 border-blue-700"
         data-tabs-inactive-classes="text-gray-500 border-gray-200"
         data-tabs-toggle="#licitaciones-tab-content" role="tablist">
         <li class="me-2" role="presentation">
-          <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+          <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-700 hover:border-blue-700"
             hx-get="/licitaciones"
             hx-replace-url="true"
             hx-trigger="click"
@@ -26,7 +27,7 @@
             hx-trigger="click"
             hx-target="#open-licitaciones-container"
             hx-swap="innerHTML"
-            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-700 hover:border-blue-700"
             id="open-licitaciones-tab" data-tabs-target="#open-licitaciones-container" type="button" role="tab" aria-controls="open-licitaciones-tab"
             aria-selected="false">Abierta</button>
         </li>
@@ -37,7 +38,7 @@
             hx-trigger="click"
             hx-target="#closed-licitaciones-container"
             hx-swap="innerHTML"
-            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-700 hover:border-blue-700"
             id="closed-licitaciones-tab" data-tabs-target="#closed-licitaciones-container" type="button" role="tab" aria-controls="closed-licitaciones-tab"
             aria-selected="false">Cerrada</button>
         </li>
@@ -48,7 +49,7 @@
             hx-trigger="click"
             hx-target="#finished-licitaciones-container"
             hx-swap="innerHTML"
-            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-800 hover:border-blue-800"
+            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-blue-700 hover:border-blue-700"
             id="finished-licitaciones-tab" data-tabs-target="#finished-licitaciones-container" type="button" role="tab" aria-controls="finished-licitaciones-tab"
             aria-selected="false">Finalizada</button>
         </li>
@@ -56,7 +57,7 @@
     </div>
     <button
       type="button"
-      class="flex justify-end text-white mt-5 sm:mt-0 bg-blue-800 hover:bg-blue-100 hover:text-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-800 dark:hover:bg-blue-800"
+      class="flex justify-end text-white mt-5 sm:mt-0 bg-blue-700 hover:bg-blue-100 hover:text-blue-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-800 dark:hover:bg-blue-800"
       ><a href="{% url 'create_licitaciones' %}">Nueva Licitacion</a>
     </button>
   </div>
