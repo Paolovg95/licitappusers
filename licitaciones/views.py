@@ -40,7 +40,7 @@ def create_update_lic(request, lic_id=0):
                     'url': url,
                     'message': 'Licitacion Creada'
                 }
-                return render(request, "partials/form_licitaciones.html", data)
+                return render(request, "partials/create_licitacion_form.html", data)
 
         elif lic_id <= 0:
             url = reverse('create_licitaciones')

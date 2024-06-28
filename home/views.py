@@ -6,3 +6,9 @@ def home(request):
 
 def panel(request):
     return render(request, "panel.html", {})
+
+def buscador(request):
+    return render(request, "buscador.html", {})
+
+def ofertantes(request):
+    return render(request, "ofertantes.html", {})
