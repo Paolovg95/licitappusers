@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
 <div id="licitaciones-body-container" class="content p-4 mt-14">
   <h1 class="mb-10 text-3xl font-extrabold dark:text-white">Licitaciones</h1>
@@ -59,7 +58,7 @@
     <button
       type="button"
       class="flex justify-end text-white mt-5 sm:mt-0 bg-blue-700 hover:bg-blue-100 hover:text-blue-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-800 dark:hover:bg-blue-800"
-      ><a href="{% url 'create_licitaciones' %}">Nueva Licitacion</a>
+      ><a href="{% url 'create_licitacion' %}">Nueva Licitacion</a>
     </button>
   </div>
   <div id="licitaciones-tab-content">
@@ -84,5 +83,6 @@
     </div>
   </div>
 </div>
-<script src="{% static 'sidebar/js/sidebar.js' %}"></script>
+
+
 {% endblock content %}

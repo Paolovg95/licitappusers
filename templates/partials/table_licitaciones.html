@@ -95,7 +95,7 @@
             </div>
           </td>
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-            <a href="{% url 'update_licitaciones' lic_id=licitacion.id %}" class="font-medium text-gray-600 dark:text-gray-500 hover:underline hover:text-gray-900">{{ licitacion.title|upper }}</a>
+            <a href="{% url 'update_licitacion' lic_id=licitacion.id %}" class="font-medium text-gray-600 dark:text-gray-500 hover:underline hover:text-gray-900">{{ licitacion.title|upper }}</a>
           </th>
           <td class="px-6 py-4">
                 {% if licitacion.status == 'OPEN' %}
@@ -128,7 +128,7 @@
             {{ licitacion.close_date }}
           </td>
           <td class="px-6 py-4">
-            <a href="{% url 'update_licitaciones' lic_id=licitacion.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            <a href="{% url 'update_licitacion' lic_id=licitacion.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
           </td>
         </tr>

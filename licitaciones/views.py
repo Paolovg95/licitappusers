@@ -27,7 +27,7 @@ def create_update_lic(request, lic_id=0):
     if request.method == 'GET':
         if lic_id != 0:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
-            url = reverse('update_licitaciones', kwargs={'lic_id': lic_instance.id })
+            url = reverse('update_licitacion', kwargs={'lic_id': lic_instance.id })
             form = LicitacionForm(instance=lic_instance)
             formset = LicitacionItemFormset(instance=lic_instance)
             data['licitacion'] = lic_instance
@@ -43,14 +43,14 @@ def create_update_lic(request, lic_id=0):
                 return render(request, "partials/create_licitacion_form.html", data)
 
         elif lic_id <= 0:
-            url = reverse('create_licitaciones')
+            url = reverse('create_licitacion')
             form = LicitacionForm()
             formset = LicitacionItemFormset()
 
         data['form'] = form
         data['formset'] = formset
         data['url'] = url
-        return render(request, "create_licitaciones.html", data)
+        return render(request, "create_licitacion.html", data)
 
     if request.method == "POST":
         if lic_id == 0:
@@ -78,4 +78,4 @@ def create_update_lic(request, lic_id=0):
                     data['form'] = form
                     data['formset'] = formset
                     data['message'] = "Datos actualizados"
-                    return render(request, "partials/form_licitaciones.html", data)
+                    return render(request, "partials/create_licitacion_form.html", data)
