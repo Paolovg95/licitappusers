@@ -1,20 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="new_lic" class="p-4 mt-14">
-  <a href="{% url 'licitaciones' %}">
-    <button
-      class="flex flex-wrap p-2">
-      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-        height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M5 12h14M5 12l4-4m-4 4 4 4" />
-      </svg>
-      <span class="ms-1 hover:border-b-1 hover:border-black">Volver atrás</span>
-    </button>
-  </a>
-  <div id="form-container">
+<!-- CREATE LICITACION CONTAINER -->
+<div id="new_lic" class="mt-14 bg-gray-100">
+  <!-- TITLE + BACK BUTTON CONTAINER -->
+  <div class="bg-white p-8">
+    <a href="{% url 'licitaciones' %}">
+      <button
+        class="flex flex-wrap">
+        <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+          height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 12h14M5 12l4-4m-4 4 4 4" />
+        </svg>
+        <span class="ms-1">Volver atrás</span>
+      </button>
+    </a>
+    <!-- TITLE TEXT CONTAINER -->
+    <div class="mt-4">
+      {% if licitacion %}
+        <h1 class="text-xl font-bold">Editar Datos</h1>
+      {% else %}
+        <h1 class="text-xl font-bold">Nueva Licitacion</h1>
+        <p class="mt-4">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      {% endif %}
+    </div>
+  </div>
+  <!-- FORM CONTAINER -->
+  <div id="form-container" class="bg-white mt-10 mr-64 ml-4 px-12 pt-6 rounded-lg">
+    <h2 class="mb-10 p-4 text-xl font-normal border-b border-gray-200">Informacion General</h2>
     {% include 'partials/create_licitacion_form.html' %}
   </div>
+  <!-- RIGHT SIDEBAR -->
+  <aside class="fixed top-0 right-0 z-40 w-48 h-screen">
+  </aside>
 </div>
 <script>
   let itemForm = document.querySelectorAll(".item-form")

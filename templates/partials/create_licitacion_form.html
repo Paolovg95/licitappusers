@@ -5,11 +5,6 @@
   licitaciones/new OR licitaciones/edit/{id}
 -->
 <form hx-post="{{ url }}" hx-target="this" hx-swap="outerHTML" hx-replace-url="true" enctype="multipart/form-data">
-  {% if licitacion %}
-    <h1 class="mb-10 p-4 text-xl font-semibold border-b border-gray-200">Editar Datos</h1>
-  {% else %}
-    <h1 class="mb-10 p-4 text-xl font-semibold border-b border-gray-200">Nueva Licitacion</h1>
-  {% endif %}
   {% csrf_token %}
   <!-- 1ST ROW -->
   <div class="flex flex-row">
@@ -17,33 +12,35 @@
       {{ form.title.label_tag }}
       {{ form.title }}
     </div>
-    <div class="basis-1/4 mx-2 block text-md font-medium leading-6 text-gray-900">
+    <div class="basis-1/4 ml-8 block text-md font-medium leading-6 text-gray-900">
       {{ form.client.label_tag }}
       {{ form.client }}
     </div>
-    <div class="basis-1/4 block text-md font-medium leading-6 text-gray-900">
-      {{ form.status.label_tag }}
-      {{ form.status }}
-    </div>
   </div>
   <!-- 2ND ROW -->
-  <div class="flex flex-row mt-10 gap-4">
+  <div class="flex flex-row mt-10">
     <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
       {{ form.obs.label_tag }}
       {{ form.obs }}
     </div>
-    <div class="basis-1/4 mb-4 block text-md font-medium leading-6 text-gray-900">
+    <div class="basis-1/4 ml-8 block text-md font-medium leading-6 text-gray-900">
+      {{ form.status.label_tag }}
+      {{ form.status }}
       {{ form.city.label_tag }}
       {{ form.city }}
-      {{ form.category.label_tag }}
-      {{ form.category }}
     </div>
-    <div class="basis-1/4 block text-md font-medium leading-6 text-gray-900">
-      {{ form.currency.label_tag }}
-      {{ form.currency }}
-      {{ form.payment_method.label_tag }}
-      {{ form.payment_method }}
+    <div class="basis-1/6 mb-4 block text-md font-medium leading-6 text-gray-900">
     </div>
+  </div>
+  <div class="basis-1/6 block text-md font-medium leading-6 text-gray-900">
+    {{ form.category.label_tag }}
+    {{ form.category }}
+  </div>
+  <div class="basis-1/4 block text-md font-medium leading-6 text-gray-900">
+    {{ form.currency.label_tag }}
+    {{ form.currency }}
+    {{ form.payment_method.label_tag }}
+    {{ form.payment_method }}
   </div>
   <!-- 3RD ROW -->
   <div class="flex flex-row my-10">
