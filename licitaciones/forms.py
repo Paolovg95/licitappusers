@@ -10,7 +10,7 @@ class LicitacionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs["label_suffix"] = ""
         super().__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs = ({'class': 'basis-1/2 mt-2 mt-2 block w-full duration-100 rounded-sm transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50'})
+        self.fields['title'].widget.attrs = ({'class': 'mt-2 block w-full duration-100 rounded-sm transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50'})
         self.fields['client'].widget.attrs = ({'class': 'mt-2 block w-full duration-100 rounded-sm transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50'})
         self.fields['status'].widget.attrs = ({'class': 'mt-2 block w-full duration-100 rounded-sm transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50'})
         self.fields['city'].widget.attrs = ({'class': 'basis-1/4 mt-2 block w-full mb-8 duration-100 rounded-sm transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50'})
