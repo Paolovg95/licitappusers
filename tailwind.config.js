@@ -2,10 +2,12 @@
 module.exports = {
   content: [
     './templates/**/*.html',
+    './static/**/**/*.js',
     './licitaciones/forms.py',
     './node_modules/flowbite/**/*.js'
   ],
   theme: {
+
     opacity: {
       '0': '0',
       '20': '0.2',
