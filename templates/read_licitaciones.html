@@ -2,15 +2,16 @@
 {% block content %}
 <div id="licitaciones-body-container" class="content mt-14">
   <h1 class="mb-10 p-4 text-xl font-normal border-b border-gray-200">Licitaciones</h1>
-  <div class="flex flex-wrap justify-between mb-4 border-b border-gray-100">
+  <div class="flex flex-wrap justify-between mb-4 p-2">
     <div class="flex flex-wrap justify-between">
-      <ul class="flex justify-end -mb-px text-sm font-medium text-center"
+      <ul class="flex justify-end -mb-px font-medium text-sm text-center rounded-md py-1 px-2 bg-gray-100 text-gray-500"
         id="licitaciones-tab"
-        data-tabs-active-classes="transition duration-600 text-black border-emerald-400"
-        data-tabs-inactive-classes="transition duration-600 text-gray-500 border-gray-200"
+        data-tabs-active-classes="transition duration-600 text-black bg-white shadow-sm"
+        data-tabs-inactive-classes="transition duration-600 text-gray-500 bg-gray-100"
         data-tabs-toggle="#licitaciones-tab-content" role="tablist">
         <li class="me-2" role="presentation">
-          <button class="inline-block p-4 border-b-2 rounded-t-lg"
+          <button
+            class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
             hx-get="/licitaciones"
             hx-replace-url="true"
             hx-trigger="click"
@@ -22,34 +23,34 @@
         </li>
         <li class="me-2" role="presentation">
           <button
+            class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
             hx-get="/licitaciones/?status=OPEN"
             hx-replace-url="true"
             hx-trigger="click"
             hx-target="#open-licitaciones-container"
             hx-swap="innerHTML"
-            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-emerald-700 hover:border-emerald-400"
             id="open-licitaciones-tab" data-tabs-target="#open-licitaciones-container" type="button" role="tab" aria-controls="open-licitaciones-tab"
             aria-selected="false">Abierta</button>
         </li>
         <li class="me-2" role="presentation">
           <button
+            class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
             hx-get="/licitaciones/?status=CLOSED"
             hx-replace-url="true"
             hx-trigger="click"
             hx-target="#closed-licitaciones-container"
             hx-swap="innerHTML"
-            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-emerald-700 hover:border-emerald-400"
             id="closed-licitaciones-tab" data-tabs-target="#closed-licitaciones-container" type="button" role="tab" aria-controls="closed-licitaciones-tab"
             aria-selected="false">Cerrada</button>
         </li>
         <li class="me-2" role="presentation">
           <button
+            class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
             hx-get="/licitaciones/?status=FINISHED"
             hx-replace-url="true"
             hx-trigger="click"
             hx-target="#finished-licitaciones-container"
             hx-swap="innerHTML"
-            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-emerald-700 hover:border-emerald-400"
             id="finished-licitaciones-tab" data-tabs-target="#finished-licitaciones-container" type="button" role="tab" aria-controls="finished-licitaciones-tab"
             aria-selected="false">Finalizada</button>
         </li>
@@ -83,4 +84,5 @@
     </div>
   </div>
 </div>
+
 {% endblock content %}
