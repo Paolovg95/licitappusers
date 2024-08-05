@@ -1,7 +1,6 @@
 {
   const data = document.currentScript.dataset;
   const isDebug = data.debug === "True";
-
   if (isDebug) {
     document.addEventListener("htmx:beforeOnLoad", function (event) {
       const xhr = event.detail.xhr;

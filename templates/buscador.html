@@ -2,5 +2,6 @@
 {% block content %}
 <div id="buscador-body-container" class="content mt-14">
   <h1 class="mb-10 p-4 text-xl font-normal border-b border-gray-200">Buscador</h1>
+  {% include 'partials/table_licitaciones.html' with licitaciones=licitaciones %}
 </div>
 {% endblock %}

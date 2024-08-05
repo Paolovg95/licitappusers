@@ -1,5 +1,7 @@
 from django.db import models
 from licitaciones.models import Licitacion
+
+
 # Create your models here.
 class Oferta(models.Model):
     licitacion = models.ForeignKey(Licitacion, on_delete=models.CASCADE)
@@ -10,6 +12,7 @@ class Oferta(models.Model):
     # User -> foreignKey
     payment_method = models.CharField(max_length=255)
     delivery_time = models.CharField(blank=True, null=True, max_length=20)
+
 
 class OfferItem(models.Model):
     offer = models.ForeignKey(Oferta, on_delete=models.CASCADE)
