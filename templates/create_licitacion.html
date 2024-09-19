@@ -2,7 +2,7 @@
 
 {% block content %}
 <!-- CREATE LICITACION CONTAINER -->
-<div id="new_lic" class="mt-14 bg-gray-100">
+<div id="new_lic">
   <!-- TITLE + BACK BUTTON CONTAINER -->
   <div class="bg-white p-8">
     <a href="{% url 'licitaciones' %}">
@@ -22,41 +22,13 @@
         <h1 class="text-xl font-bold">Editar Datos</h1>
       {% else %}
         <h1 class="text-xl font-bold">Nueva Licitacion</h1>
-        <p class="mt-4">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
       {% endif %}
     </div>
   </div>
   <!-- FORM CONTAINER -->
-  <div id="form-container" class="bg-white mt-10 mr-64 ml-4 px-12 pt-6 rounded-lg">
-    <h2 class="mb-10 p-4 text-xl font-normal border-b border-gray-200">Informacion General</h2>
-    {% include 'partials/create_licitacion_form.html' %}
+  <div id="form-container" class="px-12 pt-6 rounded-lg">
+      {% include 'partials/create_licitacion_form.html' %}
+    </div>
   </div>
-  <!-- RIGHT SIDEBAR -->
-  <aside class="fixed top-0 right-0 z-40 w-48 h-screen">
-  </aside>
 </div>
-<script>
-  let itemForm = document.querySelectorAll(".item-form")
-  let items = document.querySelector("#items")
-  let addButton = document.querySelector("#add-item")
-  let totalForms = document.querySelector("#id_licitacionitem_set-TOTAL_FORMS")
-
-  let formNum = itemForm.length - 1 // Get the number of the last form on the page with zero-based indexing
-  addButton.addEventListener('click', addForm)
-
-  function addForm(e) {
-    e.preventDefault()
-    let formLength = itemForm.length
-    let newForm = itemForm[formLength - 1].cloneNode(true)
-    let formRegex = RegExp(`licitacionitem_set-(\\d){1}-`, 'g')
-
-    formNum++ //Increment the form number
-    newForm.innerHTML = newForm.innerHTML.replace(formRegex, `licitacionitem_set-${formNum}-`) //Update the new form to have the correct form number
-    items.insertAdjacentElement("beforeend", newForm) // Insert the new form at the end of the list of forms
-
-    totalForms.setAttribute('value', `${formNum + 1}`) //Increment the number of total forms in the management form
-  }
-</script>
 {% endblock %}

@@ -9,6 +9,11 @@ asgiref = "==3.7.2"
 sqlparse = "==0.4.4"
 django-htmx = "*"
 django-compressor = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
+gunicorn = "*"
+uvicorn = "*"
 
 [dev-packages]
 

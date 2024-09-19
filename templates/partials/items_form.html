@@ -1,0 +1,45 @@
+<div class="m-4">
+  <form action="/licitaciones/new/" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div hidden>
+      {{ form.as_p }}
+    </div>
+    <h2 class="mb-4 text-3xl font-extrabold">Items</h2>
+    <div id="items">
+      {{ formset.management_form }}
+      {% for form_item in formset %}
+        {% for hidden in form_item.hidden_fields %}
+          {{ hidden }}
+        {% endfor %}
+        <div class="item-form">
+          {{ form_item.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+    <button type="submit">Save</button>
+    <button type="button" id="add-item">Add more items</button>
+    <input type="hidden" name="form_id" value="items">
+  </form>
+</div>
+  <script>
+  let itemForm = document.querySelectorAll(".item-form")
+  let items = document.querySelector("#items")
+  let addButton = document.querySelector("#add-item")
+  let totalForms = document.querySelector("#id_licitacionitem_set-TOTAL_FORMS")
+
+  let formNum = itemForm.length - 1 // Get the number of the last form on the page with zero-based indexing
+  addButton.addEventListener('click', addForm)
+
+  function addForm(e) {
+    e.preventDefault()
+    let formLength = itemForm.length
+    let newForm = itemForm[formLength - 1].cloneNode(true)
+    let formRegex = RegExp(`licitacionitem_set-(\\d){1}-`, 'g')
+
+    formNum++ //Increment the form number
+    newForm.innerHTML = newForm.innerHTML.replace(formRegex, `licitacionitem_set-${formNum}-`) //Update the new form to have the correct form number
+    items.insertAdjacentElement("beforeend", newForm) // Insert the new form at the end of the list of forms
+
+    totalForms.setAttribute('value', `${formNum + 1}`) //Increment the number of total forms in the management form
+  }
+</script>

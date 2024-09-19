@@ -1,7 +1,6 @@
 from django.db import models
 from licitaciones.models import Licitacion
 
-
 # Create your models here.
 class Oferta(models.Model):
     licitacion = models.ForeignKey(Licitacion, on_delete=models.CASCADE)
