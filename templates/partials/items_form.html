@@ -1,9 +1,10 @@
-<div class="m-4">
+<div id="form-items" class="m-4">
   <form action="/licitaciones/new/" method="POST" enctype="multipart/form-data" >
-    {% csrf_token %}
     <div hidden>
-      {{ form.as_p }}
+      {{ form }}
     </div>
+    <input type="hidden" name="form_id" value="items">
+    {% csrf_token %}
     <h2 class="mb-4 text-3xl font-extrabold">Items</h2>
     <div id="items">
       {{ formset.management_form }}
@@ -16,12 +17,13 @@
         </div>
       {% endfor %}
     </div>
-    <button type="submit">Save</button>
+    <button class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" hx-post="{% url 'create_licitacion' %}" hx-swap="innerHTML" hx-target="#forms-container" hx-trigger="click">Go back
+    </a>
+    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" type="submit">Save</button>
     <button type="button" id="add-item">Add more items</button>
-    <input type="hidden" name="form_id" value="items">
   </form>
 </div>
-  <script>
+<!-- <script>
   let itemForm = document.querySelectorAll(".item-form")
   let items = document.querySelector("#items")
   let addButton = document.querySelector("#add-item")
@@ -42,4 +44,4 @@
 
     totalForms.setAttribute('value', `${formNum + 1}`) //Increment the number of total forms in the management form
   }
-</script>
+</script> -->

@@ -4,31 +4,10 @@
 <!-- CREATE LICITACION CONTAINER -->
 <div id="new_lic">
   <!-- TITLE + BACK BUTTON CONTAINER -->
-  <div class="bg-white p-8">
-    <a href="{% url 'licitaciones' %}">
-      <button
-        class="flex flex-wrap">
-        <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-          height="24" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 12h14M5 12l4-4m-4 4 4 4" />
-        </svg>
-        <span class="ms-1">Volver atrás</span>
-      </button>
-    </a>
-    <!-- TITLE TEXT CONTAINER -->
-    <div class="mt-4">
-      {% if licitacion %}
-        <h1 class="text-xl font-bold">Editar Datos</h1>
-      {% else %}
-        <h1 class="text-xl font-bold">Nueva Licitacion</h1>
-      {% endif %}
-    </div>
-  </div>
+
   <!-- FORM CONTAINER -->
-  <div id="form-container" class="px-12 pt-6 rounded-lg">
-      {% include 'partials/create_licitacion_form.html' %}
-    </div>
+  <div id="forms-container" class="px-12 pt-6 rounded-lg" x-data="{ openInfo: true, openItems: false }">
+    {% include 'partials/create_licitacion_form.html' %}
   </div>
 </div>
 {% endblock %}

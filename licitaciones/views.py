@@ -55,19 +55,16 @@ def create_update_lic(request, lic_id=0):
                     "message": "Licitacion Creada",
                 }
                 return render(request, "partials/create_licitacion_form.html", data)
-
         elif lic_id <= 0:
-            url = reverse("create_licitacion")
-            form = LicitacionForm()
-
-        data["form"] = form
-        data["url"] = url
+            data["form"] = LicitacionForm()
+            data["url"] = reverse("create_licitacion")
         return render(request, "create_licitacion.html", data)
 
     if request.method == "POST":
         # CREATE
         if lic_id == 0:
             form = LicitacionForm(request.POST)
+            formset = LicitacionItemFormset(request.POST)
             # ITEMS FORM
             if request.POST["form_id"] == "items":
                 LicitacionItemFormset = inlineformset_factory(
@@ -78,8 +75,10 @@ def create_update_lic(request, lic_id=0):
                     lic.save()
                     formset = LicitacionItemFormset(request.POST, instance=lic)
                     if formset.is_valid():
-                        formset.save()
-                return redirect("licitaciones")
+                        formset.save(commit=False)
+                    data["form"] = form
+                    data["formset"] = formset
+                    return render(request, "partials/create_licitacion_form.html", data)
             # GENERAL INFO FORM
             elif request.POST["form_id"] == "info":
                 if form.is_valid():
@@ -88,7 +87,10 @@ def create_update_lic(request, lic_id=0):
                         Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1
                     )
                     form = LicitacionForm(instance=lic)
-                    formset = LicitacionItemFormset(instance=lic)
+                    if formset.is_valid():
+                        formset = LicitacionItemFormset(request.POST, instance=lic)
+                    else:
+                        formset = LicitacionItemFormset(instance=lic)
                     data = {"form": form, "formset": formset}
                     return render(request, "partials/items_form.html", data)
         # UPDATE
