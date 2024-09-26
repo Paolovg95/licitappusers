@@ -35,7 +35,7 @@ def read_licitaciones(request):
 
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(
-        Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1
+        Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2
     )
     data = {}
     if request.method == "GET":
@@ -90,7 +90,7 @@ def create_update_lic(request, lic_id=0):
                     if formset.is_valid():
                         formset = LicitacionItemFormset(request.POST, instance=lic)
                     else:
-                        formset = LicitacionItemFormset(instance=lic)
+                        formset = LicitacionItemFormset(request.POST,instance=lic)
                     data = {"form": form, "formset": formset}
                     return render(request, "partials/items_form.html", data)
         # UPDATE

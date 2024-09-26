@@ -1,9 +1,6 @@
 {% if message %}
   {% include 'partials/toast.html' with message=message %}
 {% endif %}
-<!-- URL could be:
-  licitaciones/new OR licitaciones/edit/{id}
--->
 <div id="form-info">
   <form hx-post="{{ url }}" hx-target="this" hx-swap="outerHTML" hx-replace-url="true">
     {% csrf_token %}
@@ -13,7 +10,6 @@
       </div>
     {% endif %}
     <input type="hidden" name="form_id" value="info">
-    <!-- 1ST ROW -->
     <div class="flex flex-row">
       <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
         {{ form.title.label_tag }}
@@ -24,7 +20,6 @@
         {{ form.client }}
       </div>
     </div>
-    <!-- 2ND ROW -->
     <div class="flex flex-row mt-10">
       <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
         {{ form.obs.label_tag }}
@@ -47,7 +42,6 @@
       {{ form.payment_method.label_tag }}
       {{ form.payment_method }}
     </div>
-    <!-- 3RD ROW -->
     <div class="flex flex-row my-10">
       <div class="basis-1/2 block text-md font-medium leading-6 text-gray-900">
         {{ form.total_sum_lic.label_tag }}
