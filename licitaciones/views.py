@@ -5,7 +5,22 @@ from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 
-
+def save_licitacion(request):
+    LicitacionItemFormset = inlineformset_factory(
+        Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2
+    )
+    if request.method == "POST":
+        # CREATE
+        form = LicitacionForm(request.POST)
+        formset = LicitacionItemFormset(request.POST)
+        if request.POST["form_id"] == "items":
+            if form.is_valid():
+                lic = form.save(commit=False)
+                lic.save()
+                formset = LicitacionItemFormset(request.POST, instance=lic)
+                if formset.is_valid():
+                    formset.save()
+        return redirect("licitaciones")
 def read_licitaciones(request):
     status = request.GET.get("status")
     if status != None:
@@ -72,7 +87,6 @@ def create_update_lic(request, lic_id=0):
                 )
                 if form.is_valid():
                     lic = form.save(commit=False)
-                    lic.save()
                     formset = LicitacionItemFormset(request.POST, instance=lic)
                     if formset.is_valid():
                         formset.save(commit=False)
@@ -90,7 +104,7 @@ def create_update_lic(request, lic_id=0):
                     if formset.is_valid():
                         formset = LicitacionItemFormset(request.POST, instance=lic)
                     else:
-                        formset = LicitacionItemFormset(request.POST,instance=lic)
+                        formset = LicitacionItemFormset(instance=lic)
                     data = {"form": form, "formset": formset}
                     return render(request, "partials/items_form.html", data)
         # UPDATE
