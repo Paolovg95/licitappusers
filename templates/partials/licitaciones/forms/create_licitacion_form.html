@@ -1,11 +1,15 @@
-{% if message %}
-  {% include 'partials/toast.html' with message=message %}
-{% endif %}
-{% include 'partials/forms/stepper/stepper.html' %}
-<div class="bg-gray-50">
-  <h1 class="mb-4 text-xl font-bold">Nueva Licitacion</h1>
-  <div id="form-info" class="px-12 bg-gray-50">
-    <form class="bg-white p-12" hx-post="{{ url }}" hx-target="this" hx-swap="outerHTML" hx-replace-url="true">
+{% include 'partials/licitaciones/components/breadcrumb.html' %}
+<div class="flex w-full justify-center m-4">
+  <h1 class="text-3xl font-bold">Nueva Licitacion</h1>
+</div>
+{% include 'partials/licitaciones/components/stepper.html' %}
+<div>
+  <div id="forms-container">
+    <form class="bg-white mt-5 px-64" hx-post="{{ url }}" hx-target="this" hx-swap="outerHTML" hx-replace-url="true">
+      <div class="border-b mb-8 pb-4">
+        <span class="text-sm font-semibold text-gray-400">Paso 1</span>
+        <h1 class="text-xl font-semibold">Detalles Generales</h1>
+      </div>
       {% csrf_token %}
       {% if formset %}
         <div hidden>

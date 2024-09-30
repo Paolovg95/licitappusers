@@ -64,13 +64,14 @@
         hx-get="{% url 'create_licitacion' %}"
         hx-target="#licitaciones-content"
         hx-swap="outerHTML"
-        hx-trigger="click">
+        hx-trigger="click"
+        hx-replace-url="true">
         Nueva Licitacion</a>
       </button>
       <div id="licitaciones-tab-content">
         <div id="licitaciones-container" role="tabpanel"
         aria-labelledby="licitaciones-tab">
-          {% include 'partials/licitaciones/table_licitaciones.html' with licitaciones=licitaciones%}
+          {% include 'partials/licitaciones/components/table_licitaciones.html' with licitaciones=licitaciones%}
         </div>
       </div>
     </div>

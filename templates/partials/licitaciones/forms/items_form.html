@@ -1,5 +1,5 @@
 {% load static %}
-<div id="form-items" class="m-4">
+<div id="form-items" class="m-4" x-data="{ step1}">
   <form action="{% url 'save_licitacion' %}" method="POST" enctype="multipart/form-data" >
     <div hidden>
       {{ form }}

@@ -10,7 +10,7 @@ def save_licitacion(request):
         Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2
     )
     if request.method == "POST":
-        # CREATE
+        # CREATE AND SAVE LICITACION
         form = LicitacionForm(request.POST)
         formset = LicitacionItemFormset(request.POST)
         if request.POST["form_id"] == "items":
@@ -28,7 +28,7 @@ def read_licitaciones(request):
         if request.htmx:
             return render(
                 request,
-                "partials/licitaciones/table_licitaciones.html",
+                "partials/licitaciones/components/table_licitaciones.html",
                 {"licitaciones": licitaciones, "status": status},
             )
         else:
@@ -38,7 +38,7 @@ def read_licitaciones(request):
             licitaciones = Licitacion.objects.all()
             return render(
                 request,
-                "partials/licitaciones/read_licitaciones_partial.html",
+                "partials/licitaciones/read_licitaciones.html",
                 {"licitaciones": licitaciones},
             )
         else:
@@ -46,8 +46,6 @@ def read_licitaciones(request):
             return render(
                 request, "home/licitaciones.html", {"licitaciones": licitaciones}
             )
-
-
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(
         Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2
@@ -72,7 +70,13 @@ def create_update_lic(request, lic_id=0):
         elif lic_id <= 0:
             data["form"] = LicitacionForm()
             data["url"] = reverse("create_licitacion")
-        return render(request, "partials/forms/create_licitacion_form.html", data)
+            if request.htmx:
+                return render(request, "partials/licitaciones/forms/create_licitacion_form.html", data)
+            else:
+                return render(request, "partials/licitaciones/create_licitacion.html", data)
+
+        return render(request, "partials/licitaciones/forms/create_licitacion_form.html", data)
+
     if request.method == "POST":
         # CREATE
         if lic_id == 0:
@@ -90,7 +94,7 @@ def create_update_lic(request, lic_id=0):
                         formset.save(commit=False)
                     data["form"] = form
                     data["formset"] = formset
-                    return render(request, "partials/forms/create_licitacion_form.html", data)
+                    return render(request, "partials/licitaciones/forms/create_licitacion_form.html", data)
             # GENERAL INFO FORM
             elif request.POST["form_id"] == "info":
                 if form.is_valid():
@@ -104,7 +108,7 @@ def create_update_lic(request, lic_id=0):
                     else:
                         formset = LicitacionItemFormset(instance=lic)
                     data = {"form": form, "formset": formset}
-                    return render(request, "partials/forms/items_form.html", data)
+                    return render(request, "partials/licitaciones/forms/items_form.html", data)
         # UPDATE
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
@@ -119,14 +123,4 @@ def create_update_lic(request, lic_id=0):
                     data["form"] = form
                     data["formset"] = formset
                     data["message"] = "Datos actualizados"
-                    return render(request, "partials/forms/create_licitacion_form.html", data)
-
-
-def render_items_form(request, lic_instance):
-    LicitacionItemFormset = inlineformset_factory(
-        Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1
-    )
-    form = LicitacionForm(instance=lic_instance)
-    formset = LicitacionItemFormset(instance=lic_instance)
-    data = {"form": form, "formset": formset}
-    return data
+                    return render(request, "partials/licitaciones/forms/create_licitacion_form.html", data)

@@ -6,8 +6,6 @@ from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 from licitaciones.models import Licitacion
 
-def home(request):
-    return render(request, "home/home.html", {})
 def panel(request):
     if request.htmx:
         return render(request,"partials/panel/panel_partial.html",{})
