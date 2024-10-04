@@ -13,39 +13,39 @@ class LicitacionForm(forms.ModelForm):
         kwargs["label_suffix"] = ""
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs = {
-            "class": "mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["client"].widget.attrs = {
-            "class": "mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["status"].widget.attrs = {
-            "class": "mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["city"].widget.attrs = {
-            "class": "basis-1/4 mt-2 block w-full mb-8 duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/4 mt-2 block w-full mb-8 duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["obs"].widget.attrs = {
-            "class": "basis-1/2 mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
+            "class": "basis-1/2 mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
             "rows": 4,
         }
         self.fields["currency"].widget.attrs = {
-            "class": "basis-1/4 mt-2 block w-full mb-8 duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/4 mt-2 block w-full mb-8 duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["total_sum_lic"].widget.attrs = {
-            "class": "basis-1/2 mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/2 mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["category"].widget.attrs = {
-            "class": "basis-1/4 mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/4 mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["payment_method"].widget.attrs = {
-            "class": "basis-1/4 mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/4 mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["delivery_time"].widget.attrs = {
-            "class": "basis-1/2 mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/2 mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
         self.fields["close_date"].widget.input_type = "date"
         self.fields["close_date"].widget.attrs = {
-            "class": "basis-1/4 mt-2 block w-full duration-100 rounded-md transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
+            "class": "basis-1/4 mt-2 block w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50"
         }
 
     def clean_close_date(self):
@@ -64,27 +64,24 @@ class LicitacionItemForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["name"].widget.attrs = {
-            "class": "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-800 focus:outline-none focus:ring-0 focus:border-blue-800 peer",
-            "placeholder": "Name",
+            "class": "block py-2.5 px-0 w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
         }
         self.fields["description"].widget.attrs = {
-            "class": "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-800 focus:outline-none focus:ring-0 focus:border-blue-800 peer",
-            "placeholder": "Description",
-            "rows": 1,
+            "class": "block py-2.5 px-0 w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
+            "rows": 2,
         }
         self.fields["quantity"].widget.attrs = {
-            "class": "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-800 focus:outline-none focus:ring-0 focus:border-blue-800 peer",
+            "class": "block py-2.5 px-0 w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
             "placeholder": "Cantidad",
         }
         self.fields["unit"].widget.attrs = {
-            "class": "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-800 focus:outline-none focus:ring-0 focus:border-blue-800 peer",
-            "placeholder": "Unit",
+            "class": "block py-2.5 px-0 w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
         }
         self.fields["price"].widget.attrs = {
-            "class": "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-800 focus:outline-none focus:ring-0 focus:border-blue-800 peer",
-            "placeholder": "Price",
+            "class": "block py-2.5 px-0 w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
         }
         self.fields["note"].widget.attrs = {
-            "class": "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-800 focus:outline-none focus:ring-0 focus:border-blue-800 peer",
-            "placeholder": "Note",
+            "class": "block py-2.5 w-full duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-600 text-high-emphasis focus:border-blue-700 outline-none focus:ring-blue-50",
+            "rows": 2,
+
         }

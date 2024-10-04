@@ -71,7 +71,7 @@ def create_update_lic(request, lic_id=0):
             data["form"] = LicitacionForm()
             data["url"] = reverse("create_licitacion")
             if request.htmx:
-                return render(request, "partials/licitaciones/forms/create_licitacion_form.html", data)
+                return render(request, "partials/licitaciones/create_licitacion.html", data)
             else:
                 return render(request, "partials/licitaciones/create_licitacion.html", data)
 
