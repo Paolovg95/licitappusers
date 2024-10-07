@@ -1,5 +1,10 @@
 <div class="relative" id="forms-container">
-  <form class="bg-white mt-5 px-64" hx-post="{{ url }}" hx-target="this" hx-swap="outerHTML" hx-replace-url="true"
+  <form
+  class="px-64 mt-4"
+  hx-post="{{ url }}"
+  hx-target="this"
+  hx-swap="outerHTML"
+  hx-replace-url="true"
   @submit.prevent="step1 =! step1; step2 =! step2">
     <div class="border-b mb-8 pb-4">
       <span class="text-sm font-semibold text-gray-400">Paso 1</span>

@@ -1,138 +1,74 @@
-<div class="mx-8 mt-6">
-  {% if status %}
-    {% if status == 'OPEN' %}
-      <span
-        class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
-        <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
-        ABIERTA
-      </span>
-    {% elif status == 'CLOSED' %}
-      <span
-        class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-        <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-        CERRADA
-      </span>
-    {% else %}
-      <span
-        class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-        <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-        FINALIZADA
-      </span>
-    {% endif %}
-  {% else %}
-    <span
-      class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
-      <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
-      ABIERTA
-    </span>
-    <span
-      class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-      <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-      CERRADA
-    </span>
-    <span
-      class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-      <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-      FINALIZADA
-    </span>
-  {% endif %}
-</div>
-<div x-data="{ open: false }" class="transition duration-600 ease-in py-5">
-  <div class="flex flex-column flex-wrap space-y-4 items-center justify-between px-4 pb-4 ">
-    <label for="table-search" class="sr-only">Search</label>
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
-        <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clip-rule="evenodd"></path>
-        </svg>
-      </div>
-      <input type="text" id="table-search"
-        class="block p-2 ps-10 text-sm duration-100 rounded transition border border-solid focus:outline-none focus:ring text-base bg-white border-gray-400 hover:border-gray-700 text-high-emphasis focus:border-teal-700 outline-none focus:ring-teal-50"
-        placeholder="Buscar por nombre">
-    </div>
-  </div>
-  <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-      <tr>
-        <th scope="col" class="p-4">
+<table class="w-full text-sm text-left rtl:text-right text-gray-500">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+    <tr>
+      <th scope="col" class="px-6 py-3">
+        Titulo
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Status
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Usuario
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Apertura
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Cierre
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Accion
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for licitacion in licitaciones %}
+      <tr class="bg-white border-b hover:bg-gray-50">
+        <td class="w-4 p-4">
           <div class="flex items-center">
-            <input id="checkbox-all-search" type="checkbox"
+            <input id="checkbox-table-search-1" type="checkbox"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-            <label for="checkbox-all-search" class="sr-only">checkbox</label>
+            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
           </div>
+        </td>
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900">
+          <button type="button" class="font-medium text-gray-600 hover:underline hover:text-gray-900">{{ licitacion.title|upper }}</button>
         </th>
-        <th scope="col" class="px-6 py-3">
-          Titulo
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Status
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Usuario
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Apertura
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Cierre
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Accion
-        </th>
+        <td class="px-6 py-4">
+              {% if licitacion.status == 'OPEN' %}
+              <span
+                class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
+                <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
+                ABIERTA
+              </span>
+              {% elif licitacion.status == 'CLOSED' %}
+              <span
+                class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
+                CERRADA
+              </span>
+              {% else %}
+              <span
+                class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
+                FINALIZADA
+              </span>
+              {% endif %}
+        </td>
+        <td class="max-w-52 px-6 py-4 truncate ...">
+          <a href="#" class="font-medium text-blue-600">John Smith</a>
+        </td>
+        <td class="px-6 py-4">
+          {{ licitacion.start_date }}
+        </td>
+        <td class="px-6 py-4">
+          {{ licitacion.close_date }}
+        </td>
+        <td class="px-6 py-4">
+          <a href="{% url 'update_licitacion' lic_id=licitacion.id %}" class="font-medium text-blue-600 hover:underline">Edit</a>
+          <a href="#" class="font-medium text-blue-600 hover:underline">Delete</a>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      {% for licitacion in licitaciones %}
-        <tr class="bg-white border-b hover:bg-gray-50">
-          <td class="w-4 p-4">
-            <div class="flex items-center">
-              <input id="checkbox-table-search-1" type="checkbox"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-              <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-            </div>
-          </td>
-          <th scope="row" class="px-6 py-4 font-medium text-gray-900">
-            <button type="button" class="font-medium text-gray-600 hover:underline hover:text-gray-900">{{ licitacion.title|upper }}</button>
-          </th>
-          <td class="px-6 py-4">
-                {% if licitacion.status == 'OPEN' %}
-                <span
-                  class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
-                  ABIERTA
-                </span>
-                {% elif licitacion.status == 'CLOSED' %}
-                <span
-                  class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-                  CERRADA
-                </span>
-                {% else %}
-                <span
-                  class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-                  FINALIZADA
-                </span>
-                {% endif %}
-          </td>
-          <td class="max-w-52 px-6 py-4 truncate ...">
-            <a href="#" class="font-medium text-blue-600">John Smith</a>
-          </td>
-          <td class="px-6 py-4">
-            {{ licitacion.start_date }}
-          </td>
-          <td class="px-6 py-4">
-            {{ licitacion.close_date }}
-          </td>
-          <td class="px-6 py-4">
-            <a href="{% url 'update_licitacion' lic_id=licitacion.id %}" class="font-medium text-blue-600 hover:underline">Edit</a>
-            <a href="#" class="font-medium text-blue-600 hover:underline">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+    {% endfor %}
+  </tbody>
+</table>

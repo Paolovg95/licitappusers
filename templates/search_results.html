@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<input type="text" name="search_text" value="{{ search_text }}" id=""
+hx-get="/licitaciones/?search_text={{ search_text }}"
+hx-trigger="keyup changed delay:500ms"
+hx-target="#results"
+hx-push-url="true">
+<div class="results" id="results">
+</div>
+{% endblock content %}

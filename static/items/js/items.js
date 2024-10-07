@@ -1,4 +1,4 @@
-var itemForm = document.querySelectorAll(".item-form")
+var itemForm = document.querySelectorAll("#item-form")
 var items = document.querySelector("#items")
 var addButton = document.querySelector("#add-item")
 var totalForms = document.querySelector("#id_licitacionitem_set-TOTAL_FORMS")

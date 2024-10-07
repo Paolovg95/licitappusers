@@ -1,7 +1,10 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 <div id="new-licitacion-container" x-data="steps">
   {% include 'partials/licitaciones/components/breadcrumb.html' %}
   {% include 'partials/licitaciones/components/stepper.html' %}
   {% include 'partials/licitaciones/forms/create_licitacion_step_1.html' %}
 </div>
 <script src="{% static 'stepper/js/stepper.js' %}"></script>
+{% endblock %}
