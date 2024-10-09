@@ -33,6 +33,7 @@
         <ul>
           <li>
             <a href="#"
+            name="buscador-link"
             class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
             :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'buscador'}"
             @click.prevent="activeTab = 'buscador'"
@@ -54,6 +55,7 @@
           </li>
           <li class="">
             <a href="#"
+            name="panel-link"
             class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
             :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'panel'}"
             @click.prevent="activeTab = 'panel'"
@@ -74,7 +76,9 @@
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
+            <a href="#"
+            name="licitaciones-link"
+            class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
             :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'licitaciones'}"
             @click.prevent="activeTab = 'licitaciones'"
             hx-get="{% url 'licitaciones' %}"
@@ -94,6 +98,7 @@
           </li>
           <li>
             <a href="#"
+            name="ofertantes-link"
             class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
             :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'ofertantes'}"
             @click.prevent="activeTab = 'ofertantes'">

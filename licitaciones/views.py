@@ -25,48 +25,55 @@ def save_licitacion(request):
                     formset.save()
         return redirect("licitaciones")
 def read_licitaciones(request):
-    print(request.headers.get("Hx-Target"))
+    print(request.headers.get("Hx-Trigger-Name"))
     status = request.GET.get("status")
     search_text = request.GET.get("search_text", "")  #1
-    if len(search_text) != 0:
-        search_text = urllib.parse.unquote(search_text) #2
-        search_text = search_text.strip()
-        licitaciones = []
-
-        if search_text:
-            parts = search_text.split()  #3
-            q = Q(title__icontains=parts[0])
-            for part in parts[1:]: #5
-                q |= Q(title__icontains=part) #6
-            licitaciones = Licitacion.objects.filter(q)  #7
-        data = {
-            "search_text": search_text,
-            "licitaciones": licitaciones,
-        }
-        return render(request, "partials/licitaciones/components/table_licitaciones.html", data)
+    if request.headers.get("Hx-Trigger-Name") == 'search_text':
+        if len(search_text) != 0:
+            search_text = urllib.parse.unquote(search_text) #2
+            search_text = search_text.strip()
+            licitaciones = []
+            if search_text:
+                parts = search_text.split()  #3
+                q = Q(title__icontains=parts[0])
+                for part in parts[1:]: #5
+                    q |= Q(title__icontains=part) #6
+                licitaciones = Licitacion.objects.filter(q)  #7
+            data = {
+                "search_text": search_text,
+                "licitaciones": licitaciones,
+            }
+            return render(request, "partials/licitaciones/components/table_licitaciones.html", data)
+        else:
+            licitaciones = Licitacion.objects.all()
+            return render(
+                request,
+                "partials/licitaciones/components/table_licitaciones.html",
+                {"licitaciones": licitaciones},
+            )
     if status != None:
         licitaciones = Licitacion.objects.filter(status=status)
         if request.htmx:
             return render(
                 request,
                 "partials/licitaciones/components/table_licitaciones.html",
-                {"licitaciones": licitaciones, "status": status},
+                {"licitaciones": licitaciones},
             )
         else:
             return redirect("licitaciones")
     else:
-        if request.htmx:
-            licitaciones = Licitacion.objects.all()
-            return render(
-                request,
-                "partials/licitaciones/read_licitaciones.html",
-                {"licitaciones": licitaciones},
-            )
-        else:
-            licitaciones = Licitacion.objects.all()
-            return render(
-                request, "home/licitaciones.html", {"licitaciones": licitaciones}
-            )
+            if request.htmx:
+                licitaciones = Licitacion.objects.all()
+                return render(
+                    request,
+                    "partials/licitaciones/read_licitaciones.html",
+                    {"licitaciones": licitaciones},
+                )
+            else:
+                licitaciones = Licitacion.objects.all()
+                return render(
+                    request, "home/licitaciones.html", {"licitaciones": licitaciones}
+                )
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(
         Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2

@@ -1,7 +1,11 @@
 <div id="licitaciones-body-container" hx-push-url="true">
   <div id="licitaciones-content">
     <h1 class="flex-none mb-10 p-4 text-xl font-normal border-b border-gray-200">Licitaciones</h1>
-    <div class="flex flex-wrap justify-between mb-4 p-2">
+    <div class="flex flex-wrap justify-between mb-4 p-2"
+    x-data="{
+      status_abierta: true,
+      status_cerrada: true,
+      status_finalizada: true}">
       <div class="flex flex-wrap justify-between">
         <ul class="flex justify-end -mb-px font-medium text-sm text-center rounded-md py-1 px-2 bg-gray-100 text-gray-500"
           id="licitaciones-tab" role="tablist">
@@ -20,23 +24,25 @@
           </li>
           <li class="me-2" role="presentation">
             <button
-              class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
-              hx-get="/licitaciones/?status=OPEN"
-              hx-replace-url="true"
-              hx-trigger="click"
-              hx-target="#licitaciones-container"
-              hx-swap="innerHTML"
-              id="open-licitaciones-tab"
-              role="tab"
-              aria-selected="false">Abierta</button>
+            class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
+            @click="status_abierta = true; status_cerrada = false; status_finalizada = false"
+            hx-get="/licitaciones/?status=OPEN"
+            hx-replace-url="true"
+            hx-trigger="click"
+            hx-target="#results"
+            hx-swap="innerHTML"
+            id="open-licitaciones-tab"
+            role="tab"
+            aria-selected="false">Abierta</button>
           </li>
           <li class="me-2" role="presentation">
             <button
               class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
+              @click="status_cerrada = true; status_abierta = false; status_finalizada = false"
               hx-get="/licitaciones/?status=CLOSED"
               hx-replace-url="true"
               hx-trigger="click"
-              hx-target="#licitaciones-container"
+              hx-target="#results"
               hx-swap="innerHTML"
               id="closed-licitaciones-tab"
               role="tab"
@@ -45,10 +51,11 @@
           <li class="me-2" role="presentation">
             <button
               class="inline-block px-4 py-2 text-black border-2 border-gray-100 rounded-lg"
+              @click="status_finalizada = true; status_cerrada = false; status_abierta = false"
               hx-get="/licitaciones/?status=FINISHED"
               hx-replace-url="true"
               hx-trigger="click"
-              hx-target="#licitaciones-container"
+              hx-target="#results"
               hx-swap="innerHTML"
               id="finished-licitaciones-tab"
               role="tab"
@@ -72,50 +79,31 @@
         <div id="licitaciones-container" role="tabpanel"
         aria-labelledby="licitaciones-tab">
           <div class="mx-8 mt-6">
-            {% if status %}
-              {% if status == 'OPEN' %}
-                <span
-                  class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
-                  ABIERTA
-                </span>
-              {% elif status == 'CLOSED' %}
-                <span
-                  class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-                  CERRADA
-                </span>
-              {% else %}
-                <span
-                  class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-                  FINALIZADA
-                </span>
-              {% endif %}
-            {% else %}
-              <span
-                class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
-                <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
-                ABIERTA
-              </span>
-              <span
-                class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
-                CERRADA
-              </span>
-              <span
-                class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
-                FINALIZADA
-              </span>
-            {% endif %}
+            <span
+              x-show="status_abierta"
+              class="inline-flex items-center bg-emerald-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
+              <span class="w-2 h-2 me-1 bg-emerald-400 rounded-full"></span>
+              ABIERTA
+            </span>
+            <span
+              x-show="status_cerrada"
+              class="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+              <span class="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
+              CERRADA
+            </span>
+            <span
+              x-show="status_finalizada"
+              class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+              <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
+              FINALIZADA
+            </span>
           </div>
           <input class="m-4" type="text" name="search_text" value="{{ search_text }}" id=""
             hx-get="{% url 'licitaciones' %}"
             hx-trigger="keyup changed delay:500ms"
             hx-target="#results"
             hx-push-url="true">
-            <div id="results" x-data="{ open: false }" class="transition duration-600 ease-in py-5">
+          <div id="results" x-data="{ open: false }" class="transition duration-600 ease-in py-5">
             {% include 'partials/licitaciones/components/table_licitaciones.html' with licitaciones=licitaciones%}
           </div>
         </div>
