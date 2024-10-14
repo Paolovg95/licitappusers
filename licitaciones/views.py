@@ -22,7 +22,8 @@ def save_licitacion(request):
                 formset = LicitacionItemFormset(request.POST, instance=lic)
                 if formset.is_valid():
                     formset = formset.save(commit=False)
-                    formset.save()
+                    for item in formset:
+                        item.save()
         return redirect("licitaciones")
 def read_licitaciones(request):
     print(request.headers.get("Hx-Trigger-Name"))
