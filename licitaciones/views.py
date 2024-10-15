@@ -26,7 +26,6 @@ def save_licitacion(request):
                         item.save()
         return redirect("licitaciones")
 def read_licitaciones(request):
-    print(request.headers.get("Hx-Trigger-Name"))
     status = request.GET.get("status")
     search_text = request.GET.get("search_text", "")  #1
     if request.headers.get("Hx-Trigger-Name") == 'search_text':
@@ -52,7 +51,7 @@ def read_licitaciones(request):
                 "partials/licitaciones/components/table_licitaciones.html",
                 {"licitaciones": licitaciones},
             )
-    if status != None:
+    elif status != None:
         licitaciones = Licitacion.objects.filter(status=status)
         if request.htmx:
             return render(
@@ -63,11 +62,30 @@ def read_licitaciones(request):
         else:
             return redirect("licitaciones")
     else:
-            if request.htmx:
-                licitaciones = Licitacion.objects.all()
+        if request.htmx:
+            licitaciones = Licitacion.objects.all()
+            return render(
+                request,
+                "partials/licitaciones/read_licitaciones.html",
+                {"licitaciones": licitaciones},
+            )
+        else:
+            if search_text:
+                search_text = urllib.parse.unquote(search_text) #2
+                search_text = search_text.strip()
+                licitaciones = []
+                if search_text:
+                    parts = search_text.split()  #3
+                    q = Q(title__icontains=parts[0])
+                    for part in parts[1:]: #5
+                        q |= Q(title__icontains=part) #6
+                    licitaciones = Licitacion.objects.filter(q)  #7
+                data = {
+                    "licitaciones": licitaciones,
+                }
                 return render(
                     request,
-                    "partials/licitaciones/read_licitaciones.html",
+                    "home/licitaciones.html",
                     {"licitaciones": licitaciones},
                 )
             else:
