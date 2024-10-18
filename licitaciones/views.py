@@ -7,6 +7,46 @@ from django.forms import inlineformset_factory
 from licitaciones.models import Licitacion, LicitacionItem
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 
+def search_licitacion(request):
+    search_text = request.GET.get("search_text", "")  #1
+    if len(search_text) != 0:
+        search_text = urllib.parse.unquote(search_text) #2
+        search_text = search_text.strip()
+        licitaciones = []
+        if search_text:
+            parts = search_text.split()  #3
+            q = Q(title__icontains=parts[0])
+            for part in parts[1:]: #5
+                q |= Q(title__icontains=part) #6
+            licitaciones = Licitacion.objects.filter(q)  #7
+        data = {
+            "search_text": search_text,
+            "licitaciones": licitaciones,
+        }
+        if request.htmx:
+            return render(request, "partials/licitaciones/components/table_licitaciones.html", data)
+        else:
+            return render(
+                request,
+                "home/licitaciones.html",
+                {"licitaciones": licitaciones},
+            )
+    else:
+        licitaciones = Licitacion.objects.all()
+        if request.htmx:
+            return render(
+                request,
+                "partials/licitaciones/components/table_licitaciones.html",
+                {"licitaciones": licitaciones},
+            )
+        else:
+            return render(
+                request,
+                "home/licitaciones.html",
+                {"licitaciones": licitaciones},
+            )
+
+
 def save_licitacion(request):
     LicitacionItemFormset = inlineformset_factory(
         Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2
@@ -27,31 +67,7 @@ def save_licitacion(request):
         return redirect("licitaciones")
 def read_licitaciones(request):
     status = request.GET.get("status")
-    search_text = request.GET.get("search_text", "")  #1
-    if request.headers.get("Hx-Trigger-Name") == 'search_text':
-        if len(search_text) != 0:
-            search_text = urllib.parse.unquote(search_text) #2
-            search_text = search_text.strip()
-            licitaciones = []
-            if search_text:
-                parts = search_text.split()  #3
-                q = Q(title__icontains=parts[0])
-                for part in parts[1:]: #5
-                    q |= Q(title__icontains=part) #6
-                licitaciones = Licitacion.objects.filter(q)  #7
-            data = {
-                "search_text": search_text,
-                "licitaciones": licitaciones,
-            }
-            return render(request, "partials/licitaciones/components/table_licitaciones.html", data)
-        else:
-            licitaciones = Licitacion.objects.all()
-            return render(
-                request,
-                "partials/licitaciones/components/table_licitaciones.html",
-                {"licitaciones": licitaciones},
-            )
-    elif status != None:
+    if status != None:
         licitaciones = Licitacion.objects.filter(status=status)
         if request.htmx:
             return render(
@@ -70,29 +86,10 @@ def read_licitaciones(request):
                 {"licitaciones": licitaciones},
             )
         else:
-            if search_text:
-                search_text = urllib.parse.unquote(search_text) #2
-                search_text = search_text.strip()
-                licitaciones = []
-                if search_text:
-                    parts = search_text.split()  #3
-                    q = Q(title__icontains=parts[0])
-                    for part in parts[1:]: #5
-                        q |= Q(title__icontains=part) #6
-                    licitaciones = Licitacion.objects.filter(q)  #7
-                data = {
-                    "licitaciones": licitaciones,
-                }
-                return render(
-                    request,
-                    "home/licitaciones.html",
-                    {"licitaciones": licitaciones},
-                )
-            else:
-                licitaciones = Licitacion.objects.all()
-                return render(
-                    request, "home/licitaciones.html", {"licitaciones": licitaciones}
-                )
+            licitaciones = Licitacion.objects.all()
+            return render(
+                request, "home/licitaciones.html", {"licitaciones": licitaciones}
+            )
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(
         Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2

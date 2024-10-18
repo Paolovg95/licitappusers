@@ -18,24 +18,22 @@
 </head>
 <body>
   <div x-data="{ isOpen: true, activeTab: '' }">
-    <header class="bg-white border-b">
-      <nav class="flex mx-4 flex items-center justify-between py-4">
-        <div class="flex">
-          <button
-            @click="isOpen =! isOpen">
-              <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path class="heroicon-ui" d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2z"/></svg>
-          </button>
-        </div>
-      </nav>
-    </header>
     <div class="flex">
-      <aside class="flex flex-col p-2 top-0 left-0 bg-white border-r-2 min-h-full">
+      <aside class="flex flex-col top-0 left-0 bg-black text-white min-h-full">
+        <nav class="flex mx-4 flex items-center justify-between py-4">
+          <div class="flex">
+            <button
+              @click="isOpen =! isOpen">
+                <svg class="fill-white" viewBox="0 0 24 24" width="24" height="24"><path class="heroicon-ui" d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2z"/></svg>
+            </button>
+          </div>
+        </nav>
         <ul>
-          <li>
+          <li class="py-2">
             <a href="#"
             name="buscador-link"
-            class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
-            :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'buscador'}"
+            class="flex items-center px-2 py-3 group hover:bg-neutral-800"
+            :class="{ 'bg-neutral-800' : activeTab === 'buscador'}"
             @click.prevent="activeTab = 'buscador'"
             hx-get="{% url 'buscador' %}"
             hx-replace-url="true"
@@ -43,8 +41,8 @@
             hx-target="#main-container"
             hx-swap="innerHTML">
               <svg
-              class="w-6 h-6 mr-3 transition duration-75 group-hover:text-emerald-400"
-              :class="{ 'text-emerald-400' : activeTab === 'buscador'}"
+              class="w-6 h-6 mr-3 transition duration-75 group-hover:text-lime-300"
+              :class="{ 'text-lime-300' : activeTab === 'buscador'}"
               aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
               height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
@@ -53,11 +51,11 @@
               <span x-show="isOpen">Buscador</span>
             </a>
           </li>
-          <li class="">
+          <li class="py-2">
             <a href="#"
             name="panel-link"
-            class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
-            :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'panel'}"
+            class="flex items-center px-2 py-3 group hover:bg-neutral-800"
+            :class="{ 'bg-neutral-800' : activeTab === 'panel'}"
             @click.prevent="activeTab = 'panel'"
             hx-get="{% url 'panel' %}"
             hx-replace-url="true"
@@ -65,8 +63,8 @@
             hx-target="#main-container"
             hx-swap="innerHTML">
               <svg
-              class="w-6 h-6 mr-3 transition duration-75 group-hover:text-emerald-400"
-              :class="{ 'text-emerald-400' : activeTab === 'panel'}"
+              class="w-6 h-6 mr-3 transition duration-75 group-hover:text-lime-300"
+              :class="{ 'text-lime-300' : activeTab === 'panel'}"
               aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
               height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -75,19 +73,19 @@
               <span x-show="isOpen">Panel</span>
             </a>
           </li>
-          <li>
+          <li class="py-2">
             <a href="#"
             name="licitaciones-link"
-            class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
-            :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'licitaciones'}"
+            class="flex items-center px-2 py-3 group hover:bg-neutral-800"
+            :class="{ 'bg-neutral-800' : activeTab === 'licitaciones'}"
             @click.prevent="activeTab = 'licitaciones'"
             hx-get="{% url 'licitaciones' %}"
             hx-replace-url="true"
             hx-trigger="click"
             hx-target="#main-container"
             hx-swap="innerHTML">
-              <svg class="w-6 h-6 mr-3 transition duration-75 group-hover:text-emerald-400"
-              :class="{ 'text-emerald-400' : activeTab === 'licitaciones'}"
+              <svg class="w-6 h-6 mr-3 transition duration-75 group-hover:text-lime-300"
+              :class="{ 'text-lime-300' : activeTab === 'licitaciones'}"
               aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
               height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -96,15 +94,15 @@
               <span x-show="isOpen">Licitaciones</span>
             </a>
           </li>
-          <li>
+          <li class="py-2">
             <a href="#"
             name="ofertantes-link"
-            class="flex items-center rounded px-3 py-3 group hover:bg-gray-100"
-            :class="{ 'hover:bg-emerald-100 bg-emerald-100' : activeTab === 'ofertantes'}"
+            class="flex items-center px-2 py-3 group hover:bg-neutral-800"
+            :class="{ 'bg-neutral-800' : activeTab === 'ofertantes'}"
             @click.prevent="activeTab = 'ofertantes'">
               <svg
-              class="w-6 h-6 mr-3 transition duration-75 group-hover:text-emerald-400"
-              :class="{ 'text-emerald-400' : activeTab === 'ofertantes'}"
+              class="w-6 h-6 mr-3 transition duration-75 group-hover:text-lime-400"
+              :class="{ 'text-lime-300' : activeTab === 'ofertantes'}"
               aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
               height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-width="2"

@@ -98,8 +98,8 @@
               FINALIZADA
             </span>
           </div>
-          <input class="m-4" type="text" name="search_text" value="{{ search_text }}" 
-            hx-get="{% url 'licitaciones' %}"
+          <input class="m-4" type="text" name="search_text"
+            hx-get="{% url 'search_results' %}"
             hx-trigger="keyup changed delay:500ms"
             hx-target="#results"
             hx-push-url="true">
