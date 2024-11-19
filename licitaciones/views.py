@@ -125,20 +125,11 @@ def create_update_lic(request, lic_id=0):
         if lic_id == 0:
             form = LicitacionForm(request.POST)
             formset = LicitacionItemFormset(request.POST)
-            # ITEMS FORM
-            if request.POST["form_id"] == "items":
-                if form.is_valid():
-                    lic = form.save(commit=False)
-                    formset = LicitacionItemFormset(request.POST, instance=lic)
-                    data["form"] = form
-                    data["formset"] = formset
-                    return render(request, "partials/licitaciones/forms/create_licitacion_step_1.html", data)
-            # GENERAL INFO FORM
-            elif request.POST["form_id"] == "info":
+            # STEP 1 - DETALLES GENERALES
+            if request.POST["form_id"] == "info":
                 if form.is_valid():
                     lic = form.save(commit=False)
                     form = LicitacionForm(instance=lic)
-                    print(formset)
                     if formset.total_form_count() <= 0:
                         formset = LicitacionItemFormset(instance=lic)
                     else:
@@ -146,6 +137,14 @@ def create_update_lic(request, lic_id=0):
                     data["form"] = form
                     data["formset"] = formset
                     return render(request, "partials/licitaciones/forms/create_licitacion_step_2.html", data)
+            # STEP 2 - ITEMS
+            elif request.POST["form_id"] == "items":
+                if form.is_valid():
+                    lic = form.save(commit=False)
+                    formset = LicitacionItemFormset(request.POST, instance=lic)
+                    data["form"] = form
+                    data["formset"] = formset
+                    return render(request, "partials/licitaciones/forms/create_licitacion_step_1.html", data)
         # UPDATE
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
