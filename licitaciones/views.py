@@ -112,39 +112,18 @@ def create_update_lic(request, lic_id=0):
                 }
         elif lic_id <= 0:
             data["form"] = LicitacionForm()
+            data["formset"] = LicitacionItemFormset()
             data["url"] = reverse("create_licitacion")
             if request.htmx:
-                return render(request, "partials/licitaciones/create_licitacion.html", data)
-            else:
                 return render(request, "partials/licitaciones/create_licitacion_base.html", data)
-
-        return render(request, "partials/licitaciones/forms/create_licitacion_form.html", data)
-
+            else:
+                return render(request, "partials/licitaciones/create_licitacion.html", data)
     if request.method == "POST":
         # CREATE
         if lic_id == 0:
             form = LicitacionForm(request.POST)
             formset = LicitacionItemFormset(request.POST)
-            # STEP 1 - DETALLES GENERALES
-            if request.POST["form_id"] == "info":
-                if form.is_valid():
-                    lic = form.save(commit=False)
-                    form = LicitacionForm(instance=lic)
-                    if formset.total_form_count() <= 0:
-                        formset = LicitacionItemFormset(instance=lic)
-                    else:
-                        formset = LicitacionItemFormset(request.POST,instance=lic)
-                    data["form"] = form
-                    data["formset"] = formset
-                    return render(request, "partials/licitaciones/forms/create_licitacion_step_2.html", data)
-            # STEP 2 - ITEMS
-            elif request.POST["form_id"] == "items":
-                if form.is_valid():
-                    lic = form.save(commit=False)
-                    formset = LicitacionItemFormset(request.POST, instance=lic)
-                    data["form"] = form
-                    data["formset"] = formset
-                    return render(request, "partials/licitaciones/forms/create_licitacion_step_1.html", data)
+            return render(request, "partials/licitaciones/forms/create_licitacion_base.html", data)
         # UPDATE
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
