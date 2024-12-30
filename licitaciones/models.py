@@ -29,6 +29,8 @@ def get_cities():
     cities.sort()
     return {i: i for i in cities}
 
+def user_path(instance, filename): #1
+    return f"licitacion{instance.id}/{filename}"
 
 class Licitacion(models.Model):
     title = models.CharField(max_length=255)
@@ -43,11 +45,14 @@ class Licitacion(models.Model):
     client = models.CharField(blank=True, null=True, max_length=20)
     city = models.CharField(blank=True, null=True, max_length=20, choices=get_cities)
     total_sum_lic = models.IntegerField()
-
     class Meta:
         verbose_name = "licitacion"
         verbose_name_plural = "licitaciones"
 
+
+class LicitacionItemPhoto(models.Model):
+    # licitacion = models.ForeignKey(Licitacion, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=user_path, null=True, blank=True)
 
 class LicitacionItem(models.Model):
     licitacion = models.ForeignKey(Licitacion, on_delete=models.CASCADE)
@@ -59,3 +64,4 @@ class LicitacionItem(models.Model):
     price = models.IntegerField()
     date_added = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     date_updated = models.DateTimeField(blank=True, null=True, auto_now=True)
+    images = models.ManyToManyField(LicitacionItemPhoto, blank=True)

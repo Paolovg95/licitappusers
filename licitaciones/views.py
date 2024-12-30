@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.forms import inlineformset_factory
-from licitaciones.models import Licitacion, LicitacionItem
+from licitaciones.models import Licitacion, LicitacionItem, LicitacionItemPhoto
 from licitaciones.forms import LicitacionForm, LicitacionItemForm
 
 def search_licitacion(request):
@@ -55,15 +55,14 @@ def save_licitacion(request):
         # CREATE AND SAVE LICITACION
         form = LicitacionForm(request.POST)
         formset = LicitacionItemFormset(request.POST)
-        if request.POST["form_id"] == "items":
-            if form.is_valid():
-                lic = form.save(commit=False)
-                lic.save()
-                formset = LicitacionItemFormset(request.POST, instance=lic)
-                if formset.is_valid():
-                    formset = formset.save(commit=False)
-                    for item in formset:
-                        item.save()
+        if form.is_valid():
+            lic = form.save(commit=False)
+            lic.save()
+            formset = LicitacionItemFormset(request.POST, instance=lic)
+            if formset.is_valid():
+                formset = formset.save(commit=False)
+                for item in formset:
+                    item.save()
         return redirect("licitaciones")
 def read_licitaciones(request):
     status = request.GET.get("status")
@@ -92,7 +91,7 @@ def read_licitaciones(request):
             )
 def create_update_lic(request, lic_id=0):
     LicitacionItemFormset = inlineformset_factory(
-        Licitacion, LicitacionItem, form=LicitacionItemForm, extra=2
+        Licitacion, LicitacionItem, form=LicitacionItemForm, extra=1, can_order=True
     )
     data = {}
     if request.method == "GET":
@@ -121,9 +120,35 @@ def create_update_lic(request, lic_id=0):
     if request.method == "POST":
         # CREATE
         if lic_id == 0:
-            form = LicitacionForm(request.POST)
+            licitacion_form = LicitacionForm(request.POST)
             formset = LicitacionItemFormset(request.POST)
-            return render(request, "partials/licitaciones/forms/create_licitacion_base.html", data)
+            initial_form = 0
+            if licitacion_form.is_valid():
+                licitacion = licitacion_form.save(commit=False)
+                licitacion.save()
+                for item_form in formset:
+                    if item_form.is_valid():
+                        item = item_form.save(commit=False)
+                        item.licitacion = licitacion
+                        item.save()
+                        images = request.FILES.getlist(f"id_licitacionitem_set-{initial_form}-images")
+                        for image in images:
+                            new_image = LicitacionItemPhoto(image=image)
+                            new_image.save()
+                            item.images.add(new_image)
+                    else:
+                        print(item_form.errors)
+                        return HttpResponse("Item not saved")
+                return HttpResponse("Saved!")
+            else:
+                return HttpResponse("Item not saved")
+                # for image in images.chunks():
+                #     print(image.name)
+            # if form.is_valid():
+            #     lic = form.save(commit=False)
+            #     if formset.is_valid():
+            #         forms
+            # return render(request, "partials/licitaciones/forms/create_licitacion_base.html", data)
         # UPDATE
         else:
             lic_instance = get_object_or_404(Licitacion, id=lic_id)
